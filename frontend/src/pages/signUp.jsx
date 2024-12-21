@@ -10,7 +10,6 @@ function SignUpPage() {
     }
 
     const signUp = async (event) => {
-        console.log("test")
         event.preventDefault();
         const data = handleSubmit(event)
         console.log(data)

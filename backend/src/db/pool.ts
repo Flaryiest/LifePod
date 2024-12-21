@@ -5,5 +5,5 @@ dotenv.config()
 const databaseURL = process.env.DATABASE_URL
 
 export default new pg.Pool({
-    database: databaseURL
+    connectionString: databaseURL
 })

@@ -1,6 +1,7 @@
 import "../style/signIn.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function LoginPage() {
+    const navigate = useNavigate()
   const handleSubmit = (event) => {
       event.preventDefault()
       const formData = new FormData(event.target.closest('form'))
@@ -13,19 +14,20 @@ function LoginPage() {
       event.preventDefault();
       const data = handleSubmit(event)
       console.log(data)
-      const response = await fetch("http://localhost:3000/api/signup", {
+      const response = await fetch("http://localhost:3000/api/login", {
           method: 'POST',
+          credentials: "include",
           headers: {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({email: data.email, password: data.password})
       })
-      if (response.status == 400) {
-          console.log(response, "response")
+      console.log(response, "response")
+      if (response.status == 400) {  
           setError("Sign up failed. Please check your details and try again.")
       }
       else if (response.status == 200) {
-          navigate("/committees")
+          navigate("/dashboard")
       }
   }
   return (

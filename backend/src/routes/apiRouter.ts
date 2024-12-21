@@ -7,5 +7,7 @@ const controller = new apiController()
 
 apiRouter.post("/signup", controller.signUp)
 
+apiRouter.post("/login", controller.login)
+
 
 export default apiRouter
