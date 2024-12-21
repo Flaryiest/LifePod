@@ -1,4 +1,4 @@
-import "../style/IndexPage.css";
+import "../style/indexPage.css";
 import { Link } from 'react-router-dom';
 import Fade from "react-awesome-reveal";
 
