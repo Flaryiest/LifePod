@@ -12,7 +12,7 @@ async function main() {
         connectionString: databaseURL
     })
     await client.connect()
-    await client.query(dbReset)
+    //await client.query(dbReset)
     await client.query(dbInit)
     await client.end()
     console.log("done")
