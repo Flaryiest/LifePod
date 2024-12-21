@@ -43,7 +43,7 @@ export default class ApiController {
                             else {
                                 res.status(200).cookie("jwt", token, {
                                     sameSite: 'none',
-                                    secure: false,
+                                    secure: true,
                                     path: '/',
                                     httpOnly: true,
                                     expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
