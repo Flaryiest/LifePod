@@ -19,13 +19,13 @@ function SignUpPage() {
             <h2 className="signup-form-title">Sign up to LifePod</h2>
             <form className="signup-form">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                <input type="email" id="email" name="email" placeholder="" required />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                <input type="password" id="password" name="password" placeholder="" required />
 
                 <label htmlFor="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required />
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="" required />
                 
                 <p className="signup-info-text">
                     By signing up, you agree to our Terms of Service and Privacy Policy.

@@ -109,5 +109,20 @@
     margin-top: 16px;
     color: var(--secondary-color);
     margin-bottom: 1rem;
+    text-align: center;
   }
   
+
+@media only screen and (max-width: 800px) {
+    .signup-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .signup-right {
+        margin-top: 0;
+    }
+    .signup-left {
+        margin-top: 0;
+    }
+}
