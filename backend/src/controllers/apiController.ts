@@ -57,4 +57,24 @@ export default class ApiController {
             })
         }
     }
+    public verifyToken = async (req: Request, res: Response, next: any) => {
+        const token = req.cookies.jwt
+        if (!token) {
+            console.log("not logged in")
+        }
+        else {
+            jwt.verifyToken(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
+                if (err) {
+                    console.log(err)
+                    res.status(400).send()
+                }
+                else {
+                    console.log(decoded)
+                    req.user = decoded
+                    
+                }
+                next()
+            })
+        }
+    }
 }
