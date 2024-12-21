@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
+import pg from "pg";
 dotenv.config();
-import { Pool } from "pg";
 const databaseURL = process.env.DATABASE_URL;
-export default new Pool({
+export default new pg.Pool({
     database: databaseURL
 });
 //# sourceMappingURL=pool.js.map
