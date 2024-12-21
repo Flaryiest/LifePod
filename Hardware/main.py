@@ -2,7 +2,7 @@ import pygame
 import threading
 from pocketsphinx import LiveSpeech
 from pygame.locals import QUIT, MOUSEBUTTONDOWN
-
+import time
 speech = []
 clock = pygame.time.Clock()
 
@@ -21,8 +21,9 @@ class Circle:
         pygame.draw.circle(self.display, self.colour, (self.x, self.y), self.radius)
 
 def transcribe():
-    global speech
+    global speech, latest
     for phrase in LiveSpeech():
+        latest = time.time()
         speech.append(str(phrase))
 
 screen = pygame.display.set_mode((1080, 1920), display=1)
