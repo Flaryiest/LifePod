@@ -64,6 +64,9 @@ class Database {
             return false
         }
     }
+    async updateBoxContents() {
+        
+    }
 }
 
 export default Database;
