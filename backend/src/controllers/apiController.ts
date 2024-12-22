@@ -119,4 +119,9 @@ export default class ApiController {
     updateBoxContents = async(req: Request, res: Response) => {
         console.log(req.body.boxid, req.body.boxContents)
     }
+
+    getMessages = async (req: Request, res: Response) => {
+        console.log(req.body.chatid)
+        
+    }
 }

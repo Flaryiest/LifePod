@@ -67,7 +67,16 @@ class Database {
     async updateBoxContents(boxid: number, boxContents: object) {
         try {
             const status = await pool.query("UPDATE box_contents WHERE ($1)", [boxid, boxContents])
+            if (status) {
+                return true
+            }
+            else {
+                return false
+            }
         }
+    } catch(err) {
+        console.log(err)
+        return false
     }
 }
 
