@@ -4,6 +4,8 @@ dotenv.config();
 const databaseURL = process.env.DATABASE_URL;
 const dbReset = 'DROP TABLE users';
 const dbInit = 'CREATE TABLE users (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, email TEXT UNIQUE, password TEXT)';
+const createChatTable = 'CREATE TABLE chats (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, userOneID INTEGER, userTwoID INTEGER)';
+const createMessageTable = 'CREATE TABLE messages (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, chatID, userOneID INTEGER, userTwoID INTEGER';
 async function main() {
     console.log("creating - please wait");
     const client = new pg.Client({

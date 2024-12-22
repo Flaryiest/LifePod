@@ -54,6 +54,27 @@ export default class ApiController {
                 });
             }
         };
+        this.verifyToken = async (req, res, next) => {
+            const token = req.cookies.jwt;
+            if (!token) {
+                console.log("not logged in");
+            }
+            else {
+                jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(400).send();
+                    }
+                    else {
+                        console.log(decoded.userInfo, "decoded");
+                        req.user = decoded.userInfo;
+                    }
+                    next();
+                });
+            }
+        };
+        this.getUserInfo = async (req, res) => {
+        };
     }
 }
 //# sourceMappingURL=apiController.js.map

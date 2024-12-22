@@ -1,5 +1,5 @@
-import ws from "ws"
-const wss = new ws.WebSocketServer({port: 8080})
+import { WebSocketServer } from "ws"
+const wss = new WebSocketServer({port: 8080})
 wss.on("connection", (ws) => {
     console.log("new connection formed.")
 })

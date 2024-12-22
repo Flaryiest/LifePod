@@ -63,18 +63,22 @@ export default class ApiController {
             console.log("not logged in")
         }
         else {
-            jwt.verifyToken(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
+            jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
                 if (err) {
                     console.log(err)
                     res.status(400).send()
                 }
                 else {
-                    console.log(decoded)
-                    req.user = decoded
+                    console.log(decoded.userInfo, "decoded")
+                    req.user = decoded.userInfo
                     
                 }
                 next()
             })
         }
+    }
+
+    public getUserInfo = async (req: Request, res: Response) => {
+
     }
 }
