@@ -122,6 +122,12 @@ export default class ApiController {
 
     getMessages = async (req: Request, res: Response) => {
         console.log(req.body.chatid)
-        
+        const messages = await db.getMessages(req.body.chatid)
+        if (messages) {
+            res.json(messages).status(200).send()
+        }
+        else  {
+            res.status(400).send()
+        }
     }
 }

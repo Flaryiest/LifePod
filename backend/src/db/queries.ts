@@ -76,8 +76,22 @@ class Database {
         } catch(err) {
             console.log(err)
             return false
-        }
+            }
         } 
+    async getMessages(chatid: number) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM messages WHERE chat_id = ($1)", [chatid])
+            if (rows) {
+                return rows
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+        }
+    }
 }
 
 export default Database;

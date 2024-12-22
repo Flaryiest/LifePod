@@ -17,4 +17,6 @@ apiRouter.post("/send/message", controller.verifyToken, controller.sendMessage)
 
 apiRouter.post("/update/box/contents", controller.verifyToken, controller.updateBoxContents)
 
+apiRouter.post("/get/messages", controller.getMessages)
+
 export default apiRouter
