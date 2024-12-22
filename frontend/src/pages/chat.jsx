@@ -27,7 +27,7 @@ const ChatRoom = () => {
                     'Content-Type': 'application/json',
                 },
             }).catch((err) => console.error('Error sending message:', err))
-
+            console.log(response, "test")
             setMessageInput('')
         }
     }
@@ -47,7 +47,7 @@ const ChatRoom = () => {
                     type="text"
                     value={messageInput}
                     onChange={(e) => setMessageInput(e.target.value)}
-                    placeholder="Type your message..."
+                    placeholder="Message Box 1"
                 />
                 <button onClick={handleSendMessage}>Send</button>
             </div>
@@ -73,12 +73,13 @@ const ToggleDashboard = () => {
                 ...prevState,
                 [itemName]: !prevState[itemName],
             }
-            fetch('/update-toggle', {
+            const response = fetch('http://localhost:3000/api/update/box/contents', {
                 method: 'POST',
                 body: JSON.stringify({
-                    item: itemName,
-                    status: updatedState[itemName],
+                    boxid: 1,
+                    boxContents: toggleItems
                 }),
+                credentials: "include",
                 headers: { 'Content-Type': 'application/json' },
             }).catch((err) => console.error('Error updating toggle:', err))
 

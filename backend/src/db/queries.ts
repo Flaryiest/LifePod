@@ -50,7 +50,7 @@ class Database {
             return false
         }
     }
-    async getBoxInfo(boxid) {
+    async getBoxInfo(boxid: number) {
         try {
             const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid])
             if (rows) {
@@ -64,8 +64,10 @@ class Database {
             return false
         }
     }
-    async updateBoxContents() {
-        
+    async updateBoxContents(boxid: number, boxContents: object) {
+        try {
+            const status = await pool.query("UPDATE box_contents WHERE ($1)", [boxid, boxContents])
+        }
     }
 }
 
