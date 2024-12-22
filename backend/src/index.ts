@@ -23,6 +23,10 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello!")
 })
 
+app.post("/", (req: Request, res: Response) => {
+    res.send("Hi")
+})
+
 app.use("/api", apiRouter)
 
 app.listen(port, () => {

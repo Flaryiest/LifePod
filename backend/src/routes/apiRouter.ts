@@ -11,5 +11,6 @@ apiRouter.post("/login", controller.login)
 
 apiRouter.get("/user", controller.verifyToken, controller.getUserInfo)
 
+apiRouter.post("/send/message", controller.sendMessage)
 
 export default apiRouter

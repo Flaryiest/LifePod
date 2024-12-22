@@ -79,6 +79,12 @@ export default class ApiController {
     }
 
     public getUserInfo = async (req: Request, res: Response) => {
-
+        if (req.body.user) {
+            res.json(req.body.user).status(200).send()
+        }
+        else {
+            res.status(200).send()
+        }
     }
+
 }
