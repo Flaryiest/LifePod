@@ -1,7 +1,7 @@
 import "../style/signUp.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function SignUpPage() {
-    
+    const navigate = useNavigate()
     const handleSubmit = (event) => {
         event.preventDefault()
         const formData = new FormData(event.target.closest('form'))
