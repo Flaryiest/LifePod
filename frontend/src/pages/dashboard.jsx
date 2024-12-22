@@ -36,23 +36,32 @@ export default function Dashboard() {
             </div>
             <div className="dashboard-top-row-container">
                 <div className="dashboard-top-row">
-                    <div className="dashboard-card">Card 1</div>
-                    <div className="dashboard-card">Card 2</div>
+                    <div className="dashboard-card">
+                        <h3 className="dashboard-stat-header">0</h3>
+                        <p className="dashboard-stat-sub-header">People Helped Today</p>
+                    </div>
+                    <div className="dashboard-card">
+                        <h3 className="dashboard-stat-header">88</h3>
+                        <p className="dashboard-stat-sub-header">Total People Helped</p>
+                    </div>
                 </div>
             </div>
             <div className="dashboard-main">
                 <div className="dashboard-left-column">
-                    <h2>Connected Boxes</h2>
-                    <div className="dashboard-card">Box 1</div>
-                    <div className="dashboard-card">Box 2</div>
-                    <div className="dashboard-card">Box 3</div>
+                    <h2 className="dashboard-card-header">Connected Boxes</h2>
+                    <div className="dashboard-card">
+                        <h2 className="dashboard-box-header">Box 1</h2>
+                        <p className="dashboard-card-text">Connection Status: Connected</p>
+                        <div className="dashboard-box-icon-container">
+                            <img src="/assets/connection.svg"></img>
+                            <img src="/assets/chat.svg" className="chat-icon"></img>            
+                        </div>
+                    </div>
                 </div>
                 <div className="dashboard-center-content">
                     <div className="dashboard-current-events">
-                        <h2>Current Events</h2>
+                        <h2 className="dashboard-card-header dashboard-event-header">Urgent Events</h2>
                         <div className="dashboard-event">Event 1</div>
-                        <div className="dashboard-event">Event 2</div>
-                        <div className="dashboard-event">Event 3</div>
                     </div>
                 </div>
                 <div className="dashboard-right-column">

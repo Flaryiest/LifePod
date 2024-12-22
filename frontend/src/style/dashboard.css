@@ -96,15 +96,16 @@
 
 .dashboard-card, .dashboard-event {
   background-color: var(--primary-card-color);
-  padding: 0.75rem;
   border-radius: 4px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  text-align: left;
   min-height: 100px;
+  padding: 40px 40px;
 }
 
 .dashboard-card {
   min-width: 300px;
+  max-height: 270px;
   min-height: 180px;
   flex-grow: 1;
   flex-shrink: 0;
@@ -148,4 +149,37 @@ h2 {
   font-size: calc(var(--sub-header-text-size) - 0.5em);
   margin-left: 12px;
   color: var(--secondary-color);
+}
+
+.dashboard-stat-header {
+  color: var(--primary-text-color);
+  font-weight: 600;
+  font-size: var(--sub-header-text-size);
+  text-align: left;
+}
+
+.dashboard-stat-sub-header {
+  text-align: left;
+}
+
+.dashboard-card-header {
+  font-size: calc(var(--sub-header-text-size) - 0.2em);
+}
+
+.dashboard-event-header {
+  margin-bottom: 20px;
+}
+
+.dashboard-box-icon-container {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  margin-top: -20px;
+}
+
+.chat-icon {
+  margin-bottom: 5px;
 }
