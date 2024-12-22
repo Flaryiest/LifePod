@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
 const ChatRoom = () => {
     const [userInfo, setUserInfo, render, rerender] = useOutletContext()
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
+    const params = useParams()
+    const chatid = params.chatid
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         if (messageInput.trim()) {
             const newMessage = {
                 message: messageInput,
@@ -14,14 +16,12 @@ const ChatRoom = () => {
             }
 
             setMessages([...messages, newMessage])
-
-            fetch('/send-message', {
+            const response = await fetch('http://localhost:3000/api/send/message', {
                 method: 'POST',
                 body: JSON.stringify({
-                    userId: 1,
-                    boxId: 1,
+                    chatid: chatid,
+                    sender: 'user',
                     message: messageInput,
-                    messageDate: new Date(),
                 }),
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,6 +67,7 @@ const ToggleDashboard = () => {
     })
 
     const handleToggleChange = (itemName) => {
+        console.log(toggleItems)
         setToggleItems((prevState) => {
             const updatedState = {
                 ...prevState,

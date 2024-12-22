@@ -31,7 +31,7 @@ const Router = createBrowserRouter(
             </Route>
             <Route element={<DashboardLayout />}>
                 <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/dashboard/chat/:chatID" element={<ChatPage />} />
+                <Route path="/dashboard/chat/:chatid" element={<ChatPage />} />
                 <Route path="/dashboard/history" element={<HistoryPage />} />
                 <Route path="/dashboard/settings" element={<SettingsPage />} />
             </Route>
