@@ -8,6 +8,16 @@ dotenv.config();
 
 const db = new database();
 
+type userType = {
+    id: number,
+    email: string,
+    password: string
+}
+
+interface CustomRequest extends Request {
+    user?: userType;
+}
+
 export default class ApiController {
     public signUp = async (req: Request, res: Response) => {
         bcrypt.hash(req.body.password, 10, async function (err, hash) {
@@ -57,7 +67,7 @@ export default class ApiController {
             })
         }
     }
-    public verifyToken = async (req: Request, res: Response, next: any) => {
+    public verifyToken = async (req: CustomRequest, res: Response, next: any) => {
         const token = req.cookies.jwt
         if (!token) {
             console.log("not logged in")
@@ -77,12 +87,14 @@ export default class ApiController {
             })
         }
     }
-    public getUserInfo = async (req: Request, res: Response) => {
-        if (req.body.user) {
-            res.json(req.body.user).status(200).send()
+    public getUserInfo = async (req: CustomRequest, res: Response) => {
+        console.log(req.user, "user")
+        if (req.user) {
+            const userInfo = await db.getInfo(req.user)
+            res.json(userInfo).status(200).send()
         }
         else {
-            res.status(200).send()
+            res.status(400).send()
         }
     }
 

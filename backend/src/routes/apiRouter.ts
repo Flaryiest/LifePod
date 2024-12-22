@@ -9,7 +9,7 @@ apiRouter.post("/signup", controller.signUp)
 
 apiRouter.post("/login", controller.login)
 
-apiRouter.get("/user", controller.verifyToken, controller.getUserInfo)
+apiRouter.post("/user", controller.verifyToken, controller.getUserInfo)
 
 apiRouter.post("/create/chat", controller.verifyToken, controller.createChat)
 

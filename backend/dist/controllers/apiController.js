@@ -74,11 +74,13 @@ export default class ApiController {
             }
         };
         this.getUserInfo = async (req, res) => {
-            if (req.body.user) {
-                res.json(req.body.user).status(200).send();
+            console.log(req.user, "user");
+            if (req.user) {
+                const userInfo = await db.getInfo(req.user);
+                res.json(userInfo).status(200).send();
             }
             else {
-                res.status(200).send();
+                res.status(400).send();
             }
         };
         this.createChat = async (req, res) => {

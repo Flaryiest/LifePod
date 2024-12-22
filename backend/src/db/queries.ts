@@ -20,6 +20,22 @@ class Database {
             return false
         }
     }
+
+    async getInfo(user: any) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM users LEFT JOIN boxes ON users.id = boxes.connected_userid LEFT JOIN box_contents ON boxes.id = box_contents.boxid ")
+            console.log(rows)
+            rows.filter((row) => {
+                return row.id = user.id
+            })
+            console.log(rows, "filtered")
+            return rows[0]
+        } catch(err) {
+            console.log(err)
+            return false
+        }
+
+    }
 }
 
 export default Database;
