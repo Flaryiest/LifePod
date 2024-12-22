@@ -35,6 +35,8 @@ class Database {
             return false;
         }
     }
+    async storeMessage(message, chatid) {
+    }
 }
 export default Database;
 //# sourceMappingURL=queries.js.map
