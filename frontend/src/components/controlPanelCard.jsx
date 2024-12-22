@@ -1,5 +1,3 @@
 export default function ControlPanelCard() {
-    return <div className="control-panel-card">
-        
-    </div>
+    return <div className="control-panel-card"></div>
 }

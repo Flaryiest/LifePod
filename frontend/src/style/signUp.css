@@ -1,4 +1,4 @@
-.signup-page{
+.signup-page {
     display: flex;
     height: 100vh;
     max-width: 100vw;
@@ -9,8 +9,8 @@
     width: 1200px;
     display: flex;
 }
-  
-  .signup-left {
+
+.signup-left {
     flex: 1;
     background-image: url('/assets/signup-background.jpg');
     background-size: cover;
@@ -21,72 +21,72 @@
     text-align: center;
     padding: 2rem;
     margin-top: 20dvh;
-  }
-  
-  .signup-left-content {
+}
+
+.signup-left-content {
     max-width: 400px;
     color: var(--primary-text-color);
-  }
-  
-  .signup-title {
+}
+
+.signup-title {
     font-size: var(--header-text-size);
     font-weight: 700;
     margin-bottom: 1rem;
-  }
-  
-  .signup-info {
+}
+
+.signup-info {
     font-size: var(--main-text-size);
     line-height: 1.6;
     color: var(--secondary-color);
-  }
-  
-  .signup-right {
+}
+
+.signup-right {
     flex: 1;
     display: flex;
     margin-top: 20dvh;
     background-color: var(--primary-background-color);
     padding: 2rem;
-  }
-  
-  .signup-form-container {
+}
+
+.signup-form-container {
     width: 100%;
     max-width: 400px;
     text-align: left;
-  }
-  
-  .signup-form-title {
+}
+
+.signup-form-title {
     font-size: var(--sub-header-text-size);
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--primary-text-color);
-  }
-  
-  .signup-form {
+}
+
+.signup-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .signup-form label {
+}
+
+.signup-form label {
     font-size: var(--main-text-size);
     margin-bottom: 0.5rem;
     color: var(--primary-text-color);
-  }
-  
-  .signup-form input {
+}
+
+.signup-form input {
     font-size: var(--main-text-size);
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid var(--secondary-color);
     border-radius: 4px;
-  }
-  
-  .signup-info-text {
+}
+
+.signup-info-text {
     font-size: var(--sub-text-size);
     color: var(--secondary-color);
     margin-bottom: 1rem;
-  }
-  
-  .signup-submit {
+}
+
+.signup-submit {
     background-color: var(--secondary-color);
     color: var(--primary-background-color);
     font-size: var(--main-text-size);
@@ -94,24 +94,23 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .signup-submit:hover {
+}
+
+.signup-submit:hover {
     background-color: var(--tertiary-color);
-  }
-  
-  .signup-redirect-text {
+}
+
+.signup-redirect-text {
     color: var(--tag-text-color);
     font-weight: 700;
-  }
-  
-.signup-info-text-two { 
+}
+
+.signup-info-text-two {
     margin-top: 16px;
     color: var(--secondary-color);
     margin-bottom: 1rem;
     text-align: center;
-  }
-  
+}
 
 @media only screen and (max-width: 800px) {
     .signup-container {

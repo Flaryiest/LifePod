@@ -1,50 +1,49 @@
-import { Outlet,} from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/sidebar'
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 export default function DashboardLayout() {
     const [userInfo, setUserInfo] = useState(null)
     const [loading, setLoading] = useState(true)
     const [render, triggerRender] = useState(0)
     useEffect(() => {
         async function getInfo() {
-            const response = await fetch("http://localhost:3000/api/user", {
-                method: "POST",
-                credentials: "include"
+            const response = await fetch('http://localhost:3000/api/user', {
+                method: 'POST',
+                credentials: 'include',
             })
             const userInfo = await response.json()
             console.log(userInfo)
             setUserInfo(userInfo)
         }
         getInfo()
-        console.log("pog")
+        console.log('pog')
     }, [render])
 
     useEffect(() => {
         if (userInfo) {
             setLoading(false)
-        }
-        else {
+        } else {
             setLoading(true)
         }
     }, [userInfo, render])
-    
+
     function rerender() {
-        triggerRender(prevState => prevState += 1)
+        triggerRender((prevState) => (prevState += 1))
     }
     if (!loading) {
-        return <div className="dashboard-page-container">
-        <Sidebar/>
-        <Outlet context={[userInfo, setUserInfo, render, rerender]}/>
-    </div>
+        return (
+            <div className="dashboard-page-container">
+                <Sidebar />
+                <Outlet context={[userInfo, setUserInfo, render, rerender]} />
+            </div>
+        )
     }
 
     if (loading) {
         return (
-        <div className="dashboard-page-container">
-            <Sidebar/>
-        </div>
+            <div className="dashboard-page-container">
+                <Sidebar />
+            </div>
         )
     }
-
-
 }

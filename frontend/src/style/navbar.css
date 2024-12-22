@@ -3,7 +3,6 @@
     box-sizing: border-box;
 }
 
-
 .header {
     padding: 2em 4em;
     display: flex;
@@ -119,5 +118,4 @@ li {
     .nav-link {
         display: none;
     }
-
 }
