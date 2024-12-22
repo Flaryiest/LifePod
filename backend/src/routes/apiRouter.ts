@@ -11,6 +11,8 @@ apiRouter.post("/login", controller.login)
 
 apiRouter.get("/user", controller.verifyToken, controller.getUserInfo)
 
-apiRouter.post("/send/message", controller.sendMessage)
+apiRouter.post("/create/chat", controller.verifyToken, controller.createChat)
+
+apiRouter.post("/send/message", controller.sendMessage, controller.sendMessage)
 
 export default apiRouter

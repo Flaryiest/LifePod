@@ -74,6 +74,19 @@ export default class ApiController {
             }
         };
         this.getUserInfo = async (req, res) => {
+            if (req.body.user) {
+                res.json(req.body.user).status(200).send();
+            }
+            else {
+                res.status(200).send();
+            }
+        };
+        this.createChat = async (req, res) => {
+            if (req.body.user) {
+            }
+        };
+        this.sendMessage = async (req, res) => {
+            console.log(req.body);
         };
     }
 }

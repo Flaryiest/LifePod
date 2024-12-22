@@ -77,7 +77,6 @@ export default class ApiController {
             })
         }
     }
-
     public getUserInfo = async (req: Request, res: Response) => {
         if (req.body.user) {
             res.json(req.body.user).status(200).send()
@@ -87,4 +86,13 @@ export default class ApiController {
         }
     }
 
+    public createChat = async (req:Request, res:Response) => {
+        if (req.body.user) {
+            
+        }
+    }
+
+    public sendMessage = async (req: Request, res: Response) => {
+        console.log(req.body)
+    }
 }

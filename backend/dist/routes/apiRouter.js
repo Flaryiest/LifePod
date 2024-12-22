@@ -5,5 +5,7 @@ const controller = new apiController();
 apiRouter.post("/signup", controller.signUp);
 apiRouter.post("/login", controller.login);
 apiRouter.get("/user", controller.verifyToken, controller.getUserInfo);
+apiRouter.post("/create/chat", controller.verifyToken, controller.createChat);
+apiRouter.post("/send/message", controller.sendMessage, controller.sendMessage);
 export default apiRouter;
 //# sourceMappingURL=apiRouter.js.map
