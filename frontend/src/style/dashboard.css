@@ -66,8 +66,8 @@
   padding: 1rem;
   border-radius: 6px;
   background-color: var(--primary-background-color);
-  box-shadow: none; /* Removed the card's shadow */
-  margin-bottom: 1rem; /* Space between sections */
+  box-shadow: none;
+  margin-bottom: 1rem;
 }
 
 .dashboard-alerts h2, .dashboard-notes h2 {
@@ -81,7 +81,7 @@
   content: '';
   display: block;
   height: 2px;
-  background-color: var(--primary-border-color); /* Border under the title */
+  background-color: var(--primary-border-color);
   margin-bottom: 1rem;
 }
 
@@ -182,4 +182,30 @@ h2 {
 
 .chat-icon {
   margin-bottom: 5px;
+}
+
+.dashboard-card,
+.dashboard-event,
+.dashboard-alert,
+.dashboard-note {
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover,
+.dashboard-event:hover,
+.dashboard-alert:hover,
+.dashboard-note:hover {
+    background-color: var(--secondary-background-color);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.dashboard-card:hover,
+.dashboard-event:hover {
+    transform: scale(1.02) translateY(-5px);
+}
+
+.dashboard-alert:hover,
+.dashboard-note:hover {
+    transform: scale(1.02) translateY(-2px);
 }

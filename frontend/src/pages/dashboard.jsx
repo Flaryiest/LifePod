@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, Link } from "react-router-dom"
 import ws from "ws"
 import "../style/dashboard.css"
 
@@ -53,8 +53,8 @@ export default function Dashboard() {
                         <h2 className="dashboard-box-header">Box 1</h2>
                         <p className="dashboard-card-text">Connection Status: Connected</p>
                         <div className="dashboard-box-icon-container">
-                            <img src="/assets/connection.svg"></img>
-                            <img src="/assets/chat.svg" className="chat-icon"></img>            
+                            <Link to="/dashboard/settings/box/1"><img src="/assets/connection.svg"></img></Link>
+                            <Link to="/dashboard/chat/1"><img src="/assets/chat.svg" className="chat-icon"></img>  </Link>          
                         </div>
                     </div>
                 </div>
