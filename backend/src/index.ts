@@ -14,6 +14,8 @@ app.use((express.urlencoded({extended: true})))
 
 app.use(cors({origin: ["https://lifepod.pages.dev", "http://184.64.116.12"], credentials: true}))
 
+app.options("*", cors())
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     next()
