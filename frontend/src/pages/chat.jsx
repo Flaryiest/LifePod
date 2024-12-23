@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
 import ws from 'ws'
 const ChatRoom = () => {
-    const [userInfo, setUserInfo, render, rerender] = useOutletContext()
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const params = useParams()
@@ -16,7 +15,7 @@ const ChatRoom = () => {
         ws.current.onmessage = async (event) => {
             const data = await event.data.text()
             const receivedMessage = JSON.parse(data)
-            setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+            setMessages((prevMessages) => [...prevMessages, receivedMessage])
         }
         ws.current.onclose = () => {
             console.log('websocket closed')
@@ -38,7 +37,7 @@ const ChatRoom = () => {
             const message = messageInput
             setMessageInput('')
             try {
-                console.log("pog")
+                console.log('pog')
                 const response = await fetch(
                     'http://localhost:3000/api/send/message',
                     {
@@ -48,13 +47,13 @@ const ChatRoom = () => {
                             sender: 'user',
                             message: message,
                         }),
-                        credentials: "include",
+                        credentials: 'include',
                         headers: {
                             'Content-Type': 'application/json',
-                        }
-                        
+                        },
                     }
                 )
+                
                 if (ws.current && ws.current.readyState === WebSocket.OPEN) {
                     ws.current.send(JSON.stringify(newMessage))
                 }
