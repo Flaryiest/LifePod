@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
-
+import ws from 'ws'
 const ChatRoom = () => {
     const [userInfo, setUserInfo, render, rerender] = useOutletContext();
     const [messages, setMessages] = useState([]);
