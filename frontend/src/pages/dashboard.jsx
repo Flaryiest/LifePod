@@ -87,7 +87,7 @@ export default function Dashboard() {
                         <div className="dashboard-alert">Alert 2</div>
                     </div>
                     <div className="dashboard-notes">
-                        <h2 classname="dashboard-sub-header">Notes</h2>
+                        <h2 className="dashboard-sub-header">Notes</h2>
                         <div className="dashboard-note">Note 1</div>
                         <div className="dashboard-note">Note 2</div>
                     </div>

@@ -13,9 +13,10 @@ const ChatRoom = () => {
         ws.current.onopen = () => {
             console.log('websocket opened')
         }
-        ws.current.onmessage = (event) => {
-            console.log('received message')
-            triggerRender((prevRender) => prevRender + 1)
+        ws.current.onmessage = async (event) => {
+            const data = await event.data.text()
+            const receivedMessage = JSON.parse(data)
+            setMessages((prevMessages) => [...prevMessages, receivedMessage]);
         }
         ws.current.onclose = () => {
             console.log('websocket closed')
@@ -36,8 +37,8 @@ const ChatRoom = () => {
             }
             const message = messageInput
             setMessageInput('')
-            setMessages([...messages, newMessage])
             try {
+                console.log("pog")
                 const response = await fetch(
                     'http://localhost:3000/api/send/message',
                     {
@@ -47,12 +48,16 @@ const ChatRoom = () => {
                             sender: 'user',
                             message: message,
                         }),
+                        credentials: "include",
                         headers: {
                             'Content-Type': 'application/json',
-                        },
+                        }
+                        
                     }
                 )
-                console.log(response, 'test')
+                if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+                    ws.current.send(JSON.stringify(newMessage))
+                }
             } catch (err) {
                 console.error('Error sending message:', err)
             }

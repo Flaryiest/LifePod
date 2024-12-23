@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import pool from "./pool.js";
 
 class Database {
@@ -51,7 +50,7 @@ class Database {
             return false
         }
     }
-    async getBoxInfo(boxid: number) {
+    async getBoxContents(boxid: number) {
         try {
             const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid])
             if (rows) {
@@ -94,6 +93,20 @@ class Database {
             return false
         }
     }
+    async createChat(boxid: number, userid: number) {
+        try {
+            const status = await pool.query("INSERT INTO chats (userid, boxid) VALUES (($1), ($2))", [boxid, userid])
+            if (status) {
+                return true
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+        }
+    }  
 }
 
 export default Database;

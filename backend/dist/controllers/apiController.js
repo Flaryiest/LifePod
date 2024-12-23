@@ -58,6 +58,7 @@ export default class ApiController {
             const token = req.cookies.jwt;
             if (!token) {
                 console.log("not logged in");
+                res.status(400).send();
             }
             else {
                 jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -84,7 +85,12 @@ export default class ApiController {
             }
         };
         this.createChat = async (req, res) => {
-            if (req.body.user) {
+            const status = await db.createChat(req.body.userid, req.body.boxid);
+            if (status) {
+                res.status(200).send();
+            }
+            else {
+                res.status(400).send();
             }
         };
         this.sendMessage = async (req, res) => {
@@ -114,6 +120,16 @@ export default class ApiController {
             const messages = await db.getMessages(req.body.chatid);
             if (messages) {
                 res.json(messages).status(200).send();
+            }
+            else {
+                res.status(400).send();
+            }
+        };
+        this.getBoxContents = async (req, res) => {
+            console.log(req.body.boxid);
+            const boxContents = await db.getBoxContents(req.body.boxid);
+            if (boxContents) {
+                res.json(boxContents).status(200).send();
             }
             else {
                 res.status(400).send();

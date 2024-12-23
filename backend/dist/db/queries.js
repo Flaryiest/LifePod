@@ -50,7 +50,7 @@ class Database {
             return false;
         }
     }
-    async getBoxInfo(boxid) {
+    async getBoxContents(boxid) {
         try {
             const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid]);
             if (rows) {
@@ -86,6 +86,21 @@ class Database {
             const { rows } = await pool.query("SELECT * FROM messages WHERE chat_id = ($1)", [chatid]);
             if (rows) {
                 return rows;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+    async createChat(boxid, userid) {
+        try {
+            const status = await pool.query("INSERT INTO chats (userid, boxid) VALUES (($1), ($2))", [boxid, userid]);
+            if (status) {
+                return true;
             }
             else {
                 return false;
