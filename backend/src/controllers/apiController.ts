@@ -46,7 +46,7 @@ export default class ApiController {
                 }
                 else {
                     console.log("pog")
-                    jwt.sign({userInfo}, process.env.JWT_SECRET, {expiresIn: "10000s"}, (err: any, token: any) => {
+                    jwt.sign({userInfo}, process.env.JWT_SECRET, {expiresIn: "100000s"}, (err: any, token: any) => {
                         console.log(userInfo)
                         if (err) {
                             console.log(err)
@@ -71,6 +71,7 @@ export default class ApiController {
         const token = req.cookies.jwt
         if (!token) {
             console.log("not logged in")
+            res.status(400).send()
         }
         else {
             jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
@@ -99,8 +100,12 @@ export default class ApiController {
     }
 
     createChat = async (req:Request, res:Response) => {
-        if (req.body.user) {
-            
+        const status = await db.createChat(req.body.userid, req.body.boxid)
+        if (status) {
+            res.status(200).send()
+        }
+        else {
+            res.status(400).send()
         }
     }
 
@@ -118,6 +123,14 @@ export default class ApiController {
 
     updateBoxContents = async(req: Request, res: Response) => {
         console.log(req.body.boxid, req.body.boxContents)
+        const status = await db.updateBoxContents(req.body.boxid, req.body.boxContents)
+        console.log(status)
+        if (status) {
+            res.status(200).send()
+        }
+        else {
+            res.status(400).send()
+        }
     }
 
     getMessages = async (req: Request, res: Response) => {
@@ -129,5 +142,17 @@ export default class ApiController {
         else  {
             res.status(400).send()
         }
+    }
+
+    getBoxContents = async (req: Request, res:Response) => {
+        console.log(req.body.boxid)
+        const boxContents = await db.getBoxContents(req.body.boxid)
+        if (boxContents) {
+            res.json(boxContents).status(200).send()
+        }
+        else {
+            res.status(400).send()
+        }
+
     }
 }
