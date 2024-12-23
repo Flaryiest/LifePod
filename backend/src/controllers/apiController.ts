@@ -118,6 +118,14 @@ export default class ApiController {
 
     updateBoxContents = async(req: Request, res: Response) => {
         console.log(req.body.boxid, req.body.boxContents)
+        const status = await db.updateBoxContents(req.body.boxid, req.body.boxContents)
+        console.log(status)
+        if (status) {
+            res.status(200).send()
+        }
+        else {
+            res.status(400).send()
+        }
     }
 
     getMessages = async (req: Request, res: Response) => {

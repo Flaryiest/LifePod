@@ -99,7 +99,25 @@ export default class ApiController {
             }
         };
         this.updateBoxContents = async (req, res) => {
-            console.log(req.body.boxContents);
+            console.log(req.body.boxid, req.body.boxContents);
+            const status = await db.updateBoxContents(req.body.boxid, req.body.boxContents);
+            console.log(status);
+            if (status) {
+                res.status(200).send();
+            }
+            else {
+                res.status(400).send();
+            }
+        };
+        this.getMessages = async (req, res) => {
+            console.log(req.body.chatid);
+            const messages = await db.getMessages(req.body.chatid);
+            if (messages) {
+                res.json(messages).status(200).send();
+            }
+            else {
+                res.status(400).send();
+            }
         };
     }
 }

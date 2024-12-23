@@ -65,7 +65,36 @@ class Database {
             return false;
         }
     }
-    async updateBoxContents() {
+    async updateBoxContents(boxid, boxContents) {
+        try {
+            const status = await pool.query("UPDATE box_contents SET item_information = ($2) WHERE ($1) = box_contents.boxid", [boxid, boxContents]);
+            console.log("test", status);
+            if (status) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+    async getMessages(chatid) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM messages WHERE chat_id = ($1)", [chatid]);
+            if (rows) {
+                return rows;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
     }
 }
 export default Database;

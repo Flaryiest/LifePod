@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     height: 100vh;
+    width: 70%;
 }
 
 .left-panel {
@@ -22,19 +23,19 @@
 
 .chatroom {
     width: 100%;
-    background-color: #f4f4f4;
+    height: 100%;
+    background-color: #fffbfb;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .message-container {
-    max-height: 400px;
-    overflow-y: scroll;
-    margin-bottom: 10px;
-}
-
-.message {
+    flex-grow: 1;
+    overflow-y: auto;
     margin-bottom: 10px;
 }
 
@@ -42,7 +43,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
 }
+
+
+.message {
+    margin-bottom: 10px;
+}
+
+
 
 .chat-input input {
     width: 80%;
@@ -50,12 +60,14 @@
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
 }
 
 .chat-input button {
     padding: 10px 15px;
     font-size: 14px;
-    background-color: #4caf50;
+    background-color: #3564ff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -63,7 +75,7 @@
 }
 
 .chat-input button:hover {
-    background-color: #45a049;
+    background-color: #1d51ff;
 }
 
 .dashboard {
