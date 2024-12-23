@@ -148,7 +148,7 @@ export default class ApiController {
         console.log(req.body.boxid)
         const boxContents = await db.getBoxContents(req.body.boxid)
         if (boxContents) {
-            res.json(boxContents).status(200).send()
+            res.json(boxContents.item_information).status(200).send()
         }
         else {
             res.status(400).send()
