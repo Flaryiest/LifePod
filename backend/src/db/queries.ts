@@ -81,7 +81,7 @@ class Database {
         } 
     async getMessages(chatid: number) {
         try {
-            const { rows } = await pool.query("SELECT * FROM messages WHERE chat_id = ($1)", [chatid])
+            const { rows } = await pool.query("SELECT * FROM messages WHERE chatid = ($1)", [chatid])
             if (rows) {
                 return rows
             }
