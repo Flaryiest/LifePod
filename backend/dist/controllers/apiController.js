@@ -46,7 +46,7 @@ export default class ApiController {
                                     secure: true,
                                     path: '/',
                                     httpOnly: true,
-                                    expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+                                    expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
                                 }).send("cookie");
                             }
                         });
@@ -88,7 +88,18 @@ export default class ApiController {
             }
         };
         this.sendMessage = async (req, res) => {
-            console.log(req.body);
+            console.log(req.body.message, req.body.chatid, req.body.sender);
+            const status = await db.sendMessage(req.body.chatid, req.body.message, req.body.sender);
+            if (status) {
+                res.status(200).send();
+            }
+            else {
+                console.log("message failed to send");
+                res.status(400).send();
+            }
+        };
+        this.updateBoxContents = async (req, res) => {
+            console.log(req.body.boxContents);
         };
     }
 }

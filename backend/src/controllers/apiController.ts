@@ -19,7 +19,7 @@ interface CustomRequest extends Request {
 }
 
 export default class ApiController {
-    public signUp = async (req: Request, res: Response) => {
+    signUp = async (req: Request, res: Response) => {
         bcrypt.hash(req.body.password, 10, async function (err, hash) {
             if (err) {
                 console.error(err, "error");
@@ -33,7 +33,7 @@ export default class ApiController {
             }
         });
     };
-    public login = async (req: Request, res: Response) => {
+    login = async (req: Request, res: Response) => {
         const userInfo = await db.login(req.body.email, req.body.password)
         if (!(userInfo)) {
             res.status(400).send()
@@ -67,7 +67,7 @@ export default class ApiController {
             })
         }
     }
-    public verifyToken = async (req: CustomRequest, res: Response, next: any) => {
+    verifyToken = async (req: CustomRequest, res: Response, next: any) => {
         const token = req.cookies.jwt
         if (!token) {
             console.log("not logged in")
@@ -87,7 +87,7 @@ export default class ApiController {
             })
         }
     }
-    public getUserInfo = async (req: CustomRequest, res: Response) => {
+    getUserInfo = async (req: CustomRequest, res: Response) => {
         console.log(req.user, "user")
         if (req.user) {
             const userInfo = await db.getInfo(req.user)
@@ -98,13 +98,36 @@ export default class ApiController {
         }
     }
 
-    public createChat = async (req:Request, res:Response) => {
+    createChat = async (req:Request, res:Response) => {
         if (req.body.user) {
             
         }
     }
 
-    public sendMessage = async (req: Request, res: Response) => {
-        console.log(req.body)
+    sendMessage = async (req: Request, res: Response) => {
+        console.log(req.body.message, req.body.chatid, req.body.sender)
+        const status = await db.sendMessage(req.body.chatid, req.body.message, req.body.sender)
+        if (status) {
+            res.status(200).send()
+        }
+        else {
+            console.log("message failed to send")
+            res.status(400).send()
+        }
+    }
+
+    updateBoxContents = async(req: Request, res: Response) => {
+        console.log(req.body.boxid, req.body.boxContents)
+    }
+
+    getMessages = async (req: Request, res: Response) => {
+        console.log(req.body.chatid)
+        const messages = await db.getMessages(req.body.chatid)
+        if (messages) {
+            res.json(messages).status(200).send()
+        }
+        else  {
+            res.status(400).send()
+        }
     }
 }

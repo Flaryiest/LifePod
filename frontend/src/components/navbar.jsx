@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../style/navbar.css";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import '../style/navbar.css'
 
 export default function Navbar() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const toggleMenu = () => {
-        setMenuOpen((prev) => !prev);
-    };
+        setMenuOpen((prev) => !prev)
+    }
 
     return (
         <div className="navbar-container">
             <header className="header">
-                <Link to="/" className="logo">LifePod</Link>
+                <Link to="/" className="logo">
+                    LifePod
+                </Link>
                 <nav className="nav">
                     <ul className="nav-links">
                         <Link to="/info" className="nav-link">
@@ -33,12 +35,24 @@ export default function Navbar() {
             {menuOpen && (
                 <div className="fullscreen-menu">
                     <ul className="fullscreen-links">
-                        <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-                        <li><Link to="/info" onClick={toggleMenu}>Info</Link></li>
-                        <li><Link to="/onboard" onClick={toggleMenu}>Login</Link></li>
+                        <li>
+                            <Link to="/" onClick={toggleMenu}>
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/info" onClick={toggleMenu}>
+                                Info
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/onboard" onClick={toggleMenu}>
+                                Login
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             )}
         </div>
-    );
+    )
 }

@@ -35,6 +35,38 @@ class Database {
             return false;
         }
     }
+    async sendMessage(chatid, message, sender) {
+        try {
+            const status = await pool.query("INSERT INTO messages (chatid, message, sender) VALUES (($1), ($2), ($3))", [chatid, message, sender]);
+            if (status) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+    async getBoxInfo(boxid) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid]);
+            if (rows) {
+                return rows[0];
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+    async updateBoxContents() {
+    }
 }
 export default Database;
 //# sourceMappingURL=queries.js.map

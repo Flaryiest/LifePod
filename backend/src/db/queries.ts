@@ -34,7 +34,63 @@ class Database {
             console.log(err)
             return false
         }
-
+    }
+    
+    async sendMessage(chatid: number, message: string, sender: string) {
+        try {
+            const status = await pool.query("INSERT INTO messages (chatid, message, sender) VALUES (($1), ($2), ($3))", [chatid, message, sender])
+            if (status) {
+                return true
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+        }
+    }
+    async getBoxInfo(boxid: number) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid])
+            if (rows) {
+                return rows[0]
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+        }
+    }
+    async updateBoxContents(boxid: number, boxContents: object) {
+        try {
+            const status = await pool.query("UPDATE box_contents WHERE ($1)", [boxid, boxContents])
+            if (status) {
+                return true
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+            }
+        } 
+    async getMessages(chatid: number) {
+        try {
+            const { rows } = await pool.query("SELECT * FROM messages WHERE chat_id = ($1)", [chatid])
+            if (rows) {
+                return rows
+            }
+            else {
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            return false
+        }
     }
 }
 

@@ -1,7 +1,8 @@
-import { Outlet } from "react-router-dom"
-export default function onboardLayout() {    
-    return <>
-        <Outlet/>
-    </>
-    
+import { Outlet } from 'react-router-dom'
+export default function onboardLayout() {
+    return (
+        <>
+            <Outlet />
+        </>
+    )
 }
