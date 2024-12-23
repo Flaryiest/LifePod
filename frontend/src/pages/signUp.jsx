@@ -13,7 +13,7 @@ function SignUpPage() {
         event.preventDefault()
         const data = handleSubmit(event)
         console.log(data)
-        const response = await fetch('lifepod-production.up.railway.app/api/signup', {
+        const response = await fetch('https://lifepod-production.up.railway.app/api/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ function LoginPage() {
         event.preventDefault()
         const data = handleSubmit(event)
         console.log(data)
-        const response = await fetch('lifepod-production.up.railway.app/api/login', {
+        const response = await fetch('https://lifepod-production.up.railway.app/api/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
