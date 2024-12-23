@@ -104,13 +104,21 @@ const ToggleDashboard = () => {
                 ...toggleItems,
                 [itemName]: !toggleItems[itemName],
             }
+
+            const convertedState = Object.fromEntries(
+                Object.entries(updatedState).map(([key, value]) => [
+                    key,
+                    value ? "true" : "false",
+                ])
+            )
+
             const response = await fetch(
                 'http://localhost:3000/api/update/box/contents',
                 {
                     method: 'POST',
                     body: JSON.stringify({
                         boxid: 1,
-                        boxContents: updatedState,
+                        boxContents: convertedState,
                     }),
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
@@ -146,6 +154,8 @@ const ToggleDashboard = () => {
         </div>
     )
 }
+
+
 
 export default function ChatPage() {
     return (
