@@ -1,45 +1,15 @@
 #include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
 
 const char* WIFI_SSID = "SHAW-4FF4";
 const char* WIFI_PASSWORD = "feast2013around";
-const char* RELAY_SERVER_URL = "http://10.0.0.250:3333/api";
-
-const char* AP_SSID = "LifePod";
-const char* AP_PASSWORD = "12345678";
+const char* SERVER_URL = "http://10.0.0.250:3333/api";
 const int SLAVE_ADDRESS = 0x08;
 
-// Web server on port 80
-ESP8266WebServer server(80);
-WiFiClient wifiClient; // Create a WiFiClient object
+WiFiClient wifiClient;
 
-// Function to parse JSON and extract pin and status
-bool parseJson(String jsonString, int &pin, int &status) {
-    StaticJsonDocument<200> doc;
-    DeserializationError error = deserializeJson(doc, jsonString);
-
-    if (error) {
-        Serial.print("JSON Parsing failed: ");
-        Serial.println(error.c_str());
-        return false;
-    }
-
-    pin = doc["pin"] | -1;        // Default to -1 if key is missing
-    status = doc["status"] | -1;  // Default to -1 if key is missing
-    return true;
-}
-
-// Function to setup access point
-void setupAccessPoint() {
-    WiFi.softAP(AP_SSID, AP_PASSWORD);
-    Serial.println("Access Point created:");
-    Serial.println(WiFi.softAPIP());
-}
-
-// Function to connect to Wi-Fi
 void connectToWiFi() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.println("Connecting to Wi-Fi...");
@@ -51,76 +21,87 @@ void connectToWiFi() {
     Serial.println(WiFi.localIP());
 }
 
-// Function to handle incoming HTTP requests
-void handleRequest() {
-    if (server.method() != HTTP_GET) {
-        server.send(405, "text/plain", "Method Not Allowed");
+void updateLEDs(const JsonObject& data) {
+    for (JsonPair kv : data) {
+        const char* item = kv.key().c_str();
+        bool status = strcmp(kv.value().as<const char*>(), "true") == 0;
+
+        // Example: Map each item to a pin number (adjust as necessary)
+        int pin = -1;
+        if (strcmp(item, "gauze") == 0) pin = 1;
+        else if (strcmp(item, "aspirin") == 0) pin = 8;
+        else if (strcmp(item, "rubbing alcohol") == 0) pin = 5;
+        else if (strcmp(item, "epi pen") == 0) pin = 6;
+        else if (strcmp(item, "medical tape") == 0) pin = 2;
+        else if (strcmp(item, "gloves") == 0) pin = 4;
+        else if (strcmp(item, "benadryl") == 0) pin = 7;
+        else if (strcmp(item, "scissors") == 0) pin = 3;
+        else if (strcmp(item, "alarm") == 0) pin = 9;
+
+        if (pin >= 0) {
+            // Send I2C command to update the corresponding LED
+            Wire.beginTransmission(SLAVE_ADDRESS);
+            Wire.write(pin);
+            Wire.write(status ? 1 : 0);
+            Wire.endTransmission();
+
+            Serial.print("Updated ");
+            Serial.print(item);
+            Serial.print(" LED to ");
+            Serial.println(status ? "ON" : "OFF");
+        }
+    }
+}
+
+void fetchAndProcessData() {
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("Wi-Fi not connected, attempting to reconnect...");
+        connectToWiFi();
         return;
     }
 
-    if (!server.hasArg("plain")) {
-        server.send(400, "text/plain", "Bad Request: Missing JSON data");
-        return;
-    }
-
-    String jsonString = server.arg("plain");
-    int pin = -1, status = -1;
-
-    if (!parseJson(jsonString, pin, status)) {
-        server.send(400, "text/plain", "Bad Request: Invalid JSON data");
-        return;
-    }
-
-    if (pin >= 0 && (status == 0 || status == 1)) {
-        // Send to I2C slave
-        Wire.beginTransmission(SLAVE_ADDRESS);
-        Wire.write(pin);
-        Wire.write(status);
-        Wire.endTransmission();
-
-        Serial.print("I2C Transmission: pin=");
-        Serial.print(pin);
-        Serial.print(", status=");
-        Serial.println(status);
-
-        server.send(200, "application/json", "{\"message\":\"I2C transmission successful\"}");
-        return;
-    }
-
-    // Forward JSON to relay server
     HTTPClient http;
-    http.begin(wifiClient, RELAY_SERVER_URL);
+    http.begin(wifiClient, SERVER_URL);
     http.addHeader("Content-Type", "application/json");
 
-    int httpCode = http.POST(jsonString);
-    String response = http.getString();
+    // Create JSON payload
+    StaticJsonDocument<128> jsonDoc;
+    jsonDoc["boxid"] = 1;
 
-    if (httpCode > 0) {
-        Serial.println("Relay server response: " + response);
-        server.send(httpCode, "application/json", response);
+    String jsonString;
+    serializeJson(jsonDoc, jsonString);
+
+    // Make POST request
+    int httpCode = http.POST(jsonString);
+    if (httpCode == HTTP_CODE_OK) {
+        String payload = http.getString();
+        Serial.println("Server response: " + payload);
+
+        StaticJsonDocument<512> doc;
+        DeserializationError error = deserializeJson(doc, payload);
+        if (error) {
+            Serial.print("JSON Parsing failed: ");
+            Serial.println(error.c_str());
+        } else {
+            JsonObject data = doc.as<JsonObject>();
+            updateLEDs(data);
+        }
     } else {
-        Serial.println("Error contacting relay server: " + http.errorToString(httpCode));
-        server.send(500, "text/plain", "Error contacting relay server");
+        Serial.print("HTTP POST failed: ");
+        Serial.println(http.errorToString(httpCode));
     }
 
     http.end();
 }
 
-// Setup function
 void setup() {
     Serial.begin(115200);
     Wire.begin();
 
-    setupAccessPoint();
     connectToWiFi();
-
-    // Set up the web server routes
-    server.on("/", handleRequest);
-    server.begin();
-    Serial.println("Web server started.");
 }
 
-// Main loop
 void loop() {
-    server.handleClient();
+    fetchAndProcessData();
+    delay(1000); // Wait 1 second before the next request
 }
