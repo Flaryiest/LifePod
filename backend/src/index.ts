@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use((express.urlencoded({extended: true})))
 
-app.use(cors({origin: ["https://lifepod.pages.dev", "http://184.64.116.12"], credentials: true}))
+app.use(cors({origin: "https://lifepod.pages.dev", credentials: true}))
 
 app.options("*", cors())
 
