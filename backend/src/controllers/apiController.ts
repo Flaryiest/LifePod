@@ -46,7 +46,7 @@ export default class ApiController {
                 }
                 else {
                     console.log("pog")
-                    jwt.sign({userInfo}, process.env.JWT_SECRET, {expiresIn: "10000s"}, (err: any, token: any) => {
+                    jwt.sign({userInfo}, process.env.JWT_SECRET, {expiresIn: "100000s"}, (err: any, token: any) => {
                         console.log(userInfo)
                         if (err) {
                             console.log(err)
