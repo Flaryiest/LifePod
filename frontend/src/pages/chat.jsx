@@ -3,30 +3,29 @@ import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
 import ws from 'ws'
 const ChatRoom = () => {
-    const [userInfo, setUserInfo, render, rerender] = useOutletContext();
-    const [messages, setMessages] = useState([]);
-    const [messageInput, setMessageInput] = useState('');
-    const params = useParams();
-    const chatid = params.chatid;
+    const [userInfo, setUserInfo, render, rerender] = useOutletContext()
+    const [messages, setMessages] = useState([])
+    const [messageInput, setMessageInput] = useState('')
+    const params = useParams()
+    const chatid = params.chatid
     useEffect(() => {
-        ws.current = new WebSocket("http://localhost:8080")
+        ws.current = new WebSocket('http://localhost:8080')
         ws.current.onopen = () => {
-            console.log("websocket opened")
+            console.log('websocket opened')
         }
         ws.current.onmessage = (event) => {
-            console.log("received message")
-            triggerRender(prevRender => prevRender + 1)
+            console.log('received message')
+            triggerRender((prevRender) => prevRender + 1)
         }
         ws.current.onclose = () => {
-            console.log("websocket closed")
+            console.log('websocket closed')
         }
         ws.current.onerror = (error) => {
-            console.log(error)    
+            console.log(error)
         }
         return () => {
             ws.current.close()
         }
-        
     }, [])
 
     const handleSendMessage = async () => {
@@ -34,29 +33,31 @@ const ChatRoom = () => {
             const newMessage = {
                 message: messageInput,
                 time: new Date().toLocaleTimeString(),
-            };
-            const message = messageInput
-            setMessageInput('');
-            setMessages([...messages, newMessage]);
-            try {
-                const response = await fetch('http://localhost:3000/api/send/message', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        chatid: chatid,
-                        sender: 'user',
-                        message: message,
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                console.log(response, "test");
-            } catch (err) {
-                console.error('Error sending message:', err);
             }
-            
+            const message = messageInput
+            setMessageInput('')
+            setMessages([...messages, newMessage])
+            try {
+                const response = await fetch(
+                    'http://localhost:3000/api/send/message',
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            chatid: chatid,
+                            sender: 'user',
+                            message: message,
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                )
+                console.log(response, 'test')
+            } catch (err) {
+                console.error('Error sending message:', err)
+            }
         }
-    };
+    }
 
     return (
         <div className="chatroom">
@@ -78,9 +79,8 @@ const ChatRoom = () => {
                 <button onClick={handleSendMessage}>Send</button>
             </div>
         </div>
-    );
-};
-
+    )
+}
 
 const ToggleDashboard = () => {
     const [userInfo, setUserInfo, render, rerender] = useOutletContext()
@@ -100,15 +100,18 @@ const ToggleDashboard = () => {
                 ...toggleItems,
                 [itemName]: !toggleItems[itemName],
             }
-            const response = await fetch('http://localhost:3000/api/update/box/contents', {
-                method: 'POST',
-                body: JSON.stringify({
-                    boxid: 1,
-                    boxContents: updatedState,
-                }),
-                credentials: "include",
-                headers: { 'Content-Type': 'application/json' },
-            })
+            const response = await fetch(
+                'http://localhost:3000/api/update/box/contents',
+                {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        boxid: 1,
+                        boxContents: updatedState,
+                    }),
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
 
             if (response.ok) {
                 rerender()
