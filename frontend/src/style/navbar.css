@@ -66,6 +66,7 @@
     list-style: none;
     text-align: center;
     padding: 0;
+    margin-top: 10dvh;
 }
 
 .fullscreen-links li {
@@ -81,6 +82,12 @@
 
 .fullscreen-links a:hover {
     font-weight: bold;
+}
+.nav-logo {
+    max-height: 30px;
+    align-self: center;
+    justify-content: center;
+    display: flex;
 }
 
 .sign-up-button {

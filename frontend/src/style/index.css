@@ -124,12 +124,13 @@ table {
     font-family: 'Inter Tight', 'Roboto', Inter, system-ui, Avenir, Helvetica,
         Arial, sans-serif;
 
-    --primary-background-color: #ffffff;
-    --primary-text-color: #44624a;
-    --secondary-color: #688b64;
-    --tertiary-color: #c0cfb2;
-
-    --tag-background-color: #fadcd9;
+    --primary-background-color: #f7f2f0;
+    --primary-text-color: #9c6875;
+    --secondary-color: #d8a49d;
+    --tertiary-color: #a8bc91;
+    
+    --tag-background-color: #ffefd6;
+    
     --tag-text-color: #4e3620;
     --sub-text-size: 0.75em;
     --main-text-size: 1em;

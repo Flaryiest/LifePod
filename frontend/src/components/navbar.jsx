@@ -13,7 +13,7 @@ export default function Navbar() {
         <div className="navbar-container">
             <header className="header">
                 <Link to="/" className="logo">
-                    LifePod
+                    <img className="nav-logo" src="/assets/lifepod-logo.webp"></img>
                 </Link>
                 <nav className="nav">
                     <ul className="nav-links">
