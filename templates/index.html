@@ -120,7 +120,8 @@
 
       ws.onmessage = (event) => {
         try {
-          const data = JSON.parse(event.data);
+          const stringData = JSON.parse(event.data.text);
+          const data = JSON.parse(stringData)
           console.log('WebSocket received:', data);
           if (Array.isArray(data)) {
             messages = data;
