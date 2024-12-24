@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../style/sidebar.css'
 
 export default function Sidebar() {
+    const navigate = useNavigate()
+    function Logout() {
+        navigate('/')
+    }
     return (
         <div className="sidebar">
             <h1 className="sidebar-title">LifePod</h1>
@@ -17,7 +21,7 @@ export default function Sidebar() {
                 </Link>
             </nav>
             <div className="sidebar-footer">
-                <Link to="/logout" className="sidebar-link logout">
+                <Link to="/" className="sidebar-link logout">
                     Logout
                 </Link>
             </div>

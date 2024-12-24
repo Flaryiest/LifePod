@@ -77,19 +77,24 @@ export default function Dashboard() {
                         <h2 className="dashboard-card-header dashboard-event-header">
                             Urgent Events
                         </h2>
-                        <div className="dashboard-event">Event 1</div>
+                        <div className="dashboard-event">
+                            There are currently no major events occurring. You
+                            will be updated if anything happens.
+                        </div>
                     </div>
                 </div>
                 <div className="dashboard-right-column">
                     <div className="dashboard-alerts">
                         <h2 className="dashboard-sub-header">Alerts</h2>
-                        <div className="dashboard-alert">Alert 1</div>
-                        <div className="dashboard-alert">Alert 2</div>
+                        <div className="dashboard-alert">
+                            Currently no alerts.
+                        </div>
                     </div>
                     <div className="dashboard-notes">
                         <h2 className="dashboard-sub-header">Notes</h2>
-                        <div className="dashboard-note">Note 1</div>
-                        <div className="dashboard-note">Note 2</div>
+                        <div className="dashboard-note">
+                            We love Mini MediHacks!
+                        </div>
                     </div>
                 </div>
             </div>

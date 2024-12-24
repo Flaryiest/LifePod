@@ -16,6 +16,7 @@ import DashboardPage from './pages/dashboard.jsx'
 import ChatPage from './pages/chat.jsx'
 import HistoryPage from './pages/history.jsx'
 import SettingsPage from './pages/settings.jsx'
+import InfoPage from './pages/info.jsx'
 
 const Router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,6 +24,7 @@ const Router = createBrowserRouter(
             <Route element={<Layout />}>
                 <Route index element={<IndexPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/info" element={<InfoPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
             <Route element={<OnboardLayout />}>

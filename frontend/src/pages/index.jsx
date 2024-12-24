@@ -39,8 +39,6 @@ function IndexPage() {
                         src="/assets/front.jpg"
                         alt="Smart Medical Box"
                     />
-                    <div className="glow-two"></div>
-                    <div className="glow-three"></div>
                 </div>
             </div>
             <div className="section-two">
@@ -108,30 +106,6 @@ function IndexPage() {
                             empowers individuals and communities to act
                             confidently in critical moments, knowing expert help
                             is just a tap away.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="section-four">
-                <div className="section-four-content">
-                    <Fade>
-                        <h2 className="section-four-header">
-                            Join the Movement
-                        </h2>
-                    </Fade>
-                    <div className="faq-container">
-                        <div className="section-four-main-text">
-                            We are committed to making emergency care accessible
-                            to everyone. If you’d like to support our mission or
-                            learn more about implementing these boxes in your
-                            community, contact us at{' '}
-                            <a
-                                className="aqua bold"
-                                href="mailto: support@lifepod.org"
-                            >
-                                support@lifepod.org
-                            </a>
-                            . Together, we can make a difference.
                         </div>
                     </div>
                 </div>

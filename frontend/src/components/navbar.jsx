@@ -44,13 +44,13 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/info" onClick={toggleMenu}>
-                                Info
+                            <Link to="/login" onClick={toggleMenu}>
+                                Login
                             </Link>
                         </li>
                         <li>
-                            <Link to="/onboard" onClick={toggleMenu}>
-                                Login
+                            <Link to="/info" onClick={toggleMenu}>
+                                Info
                             </Link>
                         </li>
                     </ul>

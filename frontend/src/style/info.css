@@ -1,0 +1,119 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter Tight', 'Roboto', system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--primary-text-color);
+    background-color: var(--primary-background-color);
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.info-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.intro-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.main-header {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    color: var(--primary-text-color);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.button-primary {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-primary:hover {
+    background-color: var(--tertiary-color);
+}
+
+.features-section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2em;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+.feature {
+    margin-bottom: 25px;
+}
+
+.feature-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.feature-description {
+    font-size: 1.1em;
+    color: var(--primary-text-color);
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.community-section {
+    padding: 40px 0;
+    text-align: center;
+    color: black;
+    background-color: var(--dashboard-background-color);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.community-text {
+    font-size: 1.3em;
+    color: black;
+    line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+    .main-header {
+        font-size: 2em;
+    }
+
+    .intro-text,
+    .feature-description,
+    .cta-text {
+        font-size: 1em;
+    }
+
+    .button-primary {
+        padding: 10px 20px;
+    }
+}

@@ -18,7 +18,7 @@
     justify-content: center;
     padding: 64px 100px;
     border-radius: 8px;
-    box-shadow: 1px 1px 1px var(--tag-background-color);
+    box-shadow: 0px 2px 4px rgb(121, 121, 121);
 }
 
 .login-title {

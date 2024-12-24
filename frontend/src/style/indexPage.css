@@ -268,8 +268,7 @@ button {
 .section-one-image {
     width: 100%;
     max-width: 600px;
-    border-radius: 16px;
-    padding-left: 2em;
+    border-radius: 32px;
     margin-top: 5dvh;
 }
 #up {
@@ -278,6 +277,10 @@ button {
 
 .section-one-text {
     width: 70%;
+}
+
+.section-two {
+    margin-top: 200px;
 }
 
 .section-two-content {
