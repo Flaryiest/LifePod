@@ -59,7 +59,7 @@ export default class ApiController {
                                 path: '/',
                                 httpOnly: true,
                                 expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-                                partitioned: true
+                                partitioned: false
                             }).send("cookie")
                         }
 

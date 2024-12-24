@@ -88,13 +88,21 @@ const ChatRoom = () => {
 
 const ToggleDashboard = () => {
     const [userInfo, setUserInfo, render, rerender] = useOutletContext()
-    const [toggleItems, setToggleItems] = useState(userInfo.item_information)
+    const [toggleItems, setToggleItems] = useState(() => {
+        // Convert string values to booleans for initialization
+        return Object.fromEntries(
+            Object.entries(userInfo.item_information).map(([key, value]) => [
+                key,
+                value === 'true', // Convert "true"/"false" strings to booleans
+            ])
+        )
+    })
 
     const handleToggleChange = async (itemName) => {
         setToggleItems((prevState) => {
             const updatedState = {
                 ...prevState,
-                [itemName]: !prevState[itemName],
+                [itemName]: !prevState[itemName], // Toggle the boolean value
             }
             return updatedState
         })
@@ -105,6 +113,7 @@ const ToggleDashboard = () => {
                 [itemName]: !toggleItems[itemName],
             }
 
+            // Convert booleans back to "true"/"false" strings for the API
             const convertedState = Object.fromEntries(
                 Object.entries(updatedState).map(([key, value]) => [
                     key,
@@ -135,7 +144,7 @@ const ToggleDashboard = () => {
 
     return (
         <div className="dashboard">
-            <h2>Toggle Dashboard</h2>
+            <h2>Light Switches</h2>
             <div className="toggle-container">
                 {Object.keys(toggleItems).map((item) => (
                     <div key={item} className="toggle-card">
