@@ -71,9 +71,33 @@
     let messages = [];
 
     function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    try {
+        if (!dateStr) {
+          console.warn('No date string provided');
+          return 'Unknown Date';
+        }
+
+        const date = new Date(dateStr);
+
+        if (isNaN(date)) {
+          console.error('Invalid Date:', dateStr);
+          return 'Invalid Date';
+        }
+
+        return date.toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+        });
+      } catch (error) {
+        console.error('Error formatting date:', dateStr, error);
+        return 'Error Formatting Date';
+      }
     }
+
 
     function renderMessages(messages) {
       messageContainer.innerHTML = '';
