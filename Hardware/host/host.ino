@@ -2,13 +2,14 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
+#include <WiFiClientSecure.h>
 
 const char* WIFI_SSID = "SHAW-4FF4";
 const char* WIFI_PASSWORD = "feast2013around";
-const char* SERVER_URL = "http://10.0.0.250:3333/api";
+const char* SERVER_URL = "https://lifepod-production.up.railway.app/api/get/box/contents";
 const int SLAVE_ADDRESS = 0x08;
 
-WiFiClient wifiClient;
+WiFiClientSecure wifiClient;
 
 void connectToWiFi() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -19,6 +20,7 @@ void connectToWiFi() {
     }
     Serial.println("\nConnected to Wi-Fi:");
     Serial.println(WiFi.localIP());
+    wifiClient.setInsecure();
 }
 
 void updateLEDs(const JsonObject& data) {
