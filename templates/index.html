@@ -118,9 +118,9 @@
         console.log('WebSocket connection opened');
       };
 
-      ws.onmessage = (event) => {
+      ws.onmessage = async (event) => {
         try {
-          const stringData = JSON.parse(event.data.text);
+          const stringData = await event.data.text;
           const data = JSON.parse(stringData)
           console.log('WebSocket received:', data);
           if (Array.isArray(data)) {
