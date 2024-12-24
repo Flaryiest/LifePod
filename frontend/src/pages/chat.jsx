@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react'
+import { useOutletContext, useParams } from 'react-router-dom'
+import '../style/chat.css'
+
 const ChatRoom = () => {
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
