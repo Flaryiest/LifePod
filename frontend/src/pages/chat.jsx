@@ -53,7 +53,7 @@ const ChatRoom = () => {
                         },
                     }
                 )
-                
+
                 if (ws.current && ws.current.readyState === WebSocket.OPEN) {
                     ws.current.send(JSON.stringify(newMessage))
                 }
@@ -108,7 +108,7 @@ const ToggleDashboard = () => {
             const convertedState = Object.fromEntries(
                 Object.entries(updatedState).map(([key, value]) => [
                     key,
-                    value ? "true" : "false",
+                    value ? 'true' : 'false',
                 ])
             )
 
@@ -154,8 +154,6 @@ const ToggleDashboard = () => {
         </div>
     )
 }
-
-
 
 export default function ChatPage() {
     return (

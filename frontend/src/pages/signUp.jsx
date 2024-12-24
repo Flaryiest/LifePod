@@ -13,16 +13,19 @@ function SignUpPage() {
         event.preventDefault()
         const data = handleSubmit(event)
         console.log(data)
-        const response = await fetch('https://lifepod-production.up.railway.app/api/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password,
-            }),
-        })
+        const response = await fetch(
+            'https://lifepod-production.up.railway.app/api/signup',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password,
+                }),
+            }
+        )
         if (response.status == 400) {
             console.log(response, 'response')
             setError('Sign up failed. Please check your details and try again.')
