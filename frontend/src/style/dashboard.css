@@ -39,7 +39,7 @@
 }
 
 .dashboard-left-column {
-    background-color: var(--secondary-background-color);
+    background-color: var(--card-background-color);
     padding: 1rem;
     border-radius: 6px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,7 @@
 .dashboard-notes {
     padding: 1rem;
     border-radius: 6px;
-    background-color: var(--primary-background-color);
+    background-color: var(--card-background-color);
     box-shadow: none;
     margin-bottom: 1rem;
 }
@@ -84,13 +84,13 @@
     content: '';
     display: block;
     height: 2px;
-    background-color: var(--primary-border-color);
+    background-color: var(--card-background-color);
     margin-bottom: 1rem;
 }
 
 .dashboard-alert,
 .dashboard-note {
-    background-color: var(--primary-card-color);
+    background-color: var(--card-background-color);
     padding: 0.75rem;
     border-radius: 4px;
     margin-bottom: 0.5rem;
@@ -100,7 +100,7 @@
 
 .dashboard-card,
 .dashboard-event {
-    background-color: var(--primary-card-color);
+    background-color: var(--card-background-color);
     border-radius: 4px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
