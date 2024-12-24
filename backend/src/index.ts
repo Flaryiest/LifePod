@@ -15,6 +15,6 @@ app.use((express.urlencoded({extended: true})))
 
 app.use("/api", apiRouter)
 
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log("Port: " + String(port))
 })
