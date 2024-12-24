@@ -5,13 +5,13 @@ import cors from "cors";
 import apiRouter from "./routes/apiRouter.js";
 dotenv.config();
 const app = express();
-const port = 3000;
-app.use(cors({ origin: "https://lifepod.pages.dev", credentials: true }));
+const port = process.env.PORT || 3000;
+app.use(cors({ origin: ["https://lifepod.pages.dev", "184.64.116.12"], credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use((express.urlencoded({ extended: true })));
 app.use("/api", apiRouter);
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log("Port: " + String(port));
 });
 //# sourceMappingURL=index.js.map

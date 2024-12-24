@@ -14,18 +14,22 @@ function LoginPage() {
         event.preventDefault()
         const data = handleSubmit(event)
         console.log(data)
-        const response = await fetch('https://lifepod-production.up.railway.app/api/login', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password,
-            }),
-        })
-        console.log(response, 'response')
+        const response = await fetch(
+            'https://lifepod-production.up.railway.app/api/login',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password,
+                }),
+            }
+        )
+        console.log('Response:', response);
+        console.log('Set-Cookie Header:', response.headers.get('set-cookie'));
         if (response.status == 400) {
             setError('Sign up failed. Please check your details and try again.')
         } else if (response.status == 200) {

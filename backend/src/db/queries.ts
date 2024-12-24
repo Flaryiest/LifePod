@@ -52,7 +52,7 @@ class Database {
     }
     async getBoxContents(boxid: number) {
         try {
-            const { rows } = await pool.query("SELECT item_information FROM box_contents WHERE ($1) = box_contents.boxid", [boxid])
+            const { rows } = await pool.query("SELECT * FROM box_contents WHERE ($1) = box_contents.boxid", [boxid])
             if (rows) {
                 return rows[0]
             }
@@ -81,7 +81,7 @@ class Database {
         } 
     async getMessages(chatid: number) {
         try {
-            const { rows } = await pool.query("SELECT box_contents FROM messages WHERE chat_id = ($1)", [chatid])
+            const { rows } = await pool.query("SELECT * FROM messages WHERE chatid = ($1)", [chatid])
             if (rows) {
                 return rows
             }
