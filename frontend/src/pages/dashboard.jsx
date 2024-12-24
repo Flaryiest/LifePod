@@ -8,7 +8,7 @@ export default function Dashboard() {
     console.log(userInfo, 'in dashboard')
 
     useEffect(() => {
-        ws.current = new WebSocket('http://localhost:8080')
+        ws.current = new WebSocket('lifepod-server.up.railway.app')
         ws.current.onopen = () => {
             console.log('websocket opened')
         }

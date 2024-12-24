@@ -8,7 +8,7 @@ const ChatRoom = () => {
     const params = useParams()
     const chatid = params.chatid
     useEffect(() => {
-        ws.current = new WebSocket('http://localhost:8080')
+        ws.current = new WebSocket('wss://lifepod-server.up.railway.app')
         ws.current.onopen = () => {
             console.log('websocket opened')
         }
@@ -39,7 +39,7 @@ const ChatRoom = () => {
             try {
                 console.log('pog')
                 const response = await fetch(
-                    'http://localhost:3000/api/send/message',
+                    'https://lifepod-production.up.railway.app/api/send/message',
                     {
                         method: 'POST',
                         body: JSON.stringify({
