@@ -175,6 +175,7 @@
           const result = await response.json();
           console.log(result);
           if (ws && ws.readyState === WebSocket.OPEN) {
+            console.log(payload)
             ws.send(JSON.stringify(payload));
           }
         } catch (error) {

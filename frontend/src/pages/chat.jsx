@@ -36,7 +36,7 @@ const ChatRoom = () => {
         if (messageInput.trim()) {
             const newMessage = {
                 message: messageInput,
-                sender: 'helper',
+                sender: 'Helper',
                 time: new Date().toLocaleTimeString(),
             }
             setMessageInput('')
@@ -47,7 +47,7 @@ const ChatRoom = () => {
                         method: 'POST',
                         body: JSON.stringify({
                             chatid: chatid,
-                            sender: 'user',
+                            sender: 'Helper',
                             message: messageInput,
                         }),
                         credentials: 'include',
