@@ -21,10 +21,14 @@ function IndexPage() {
                     </Fade>
                     <div className="section-one-text">
                         Introducing a cutting-edge device designed to save
-                        lives. Our smart medical box, hosted in public any public area is fit with solar-powered technologies that ensure that help is always accessible anywhere, anytime.
-                        
-                        Our goal is to guide anyone through the toughest or scariest moments using visual guides and step-by-step instructions by first responders. 
-                        Through an easy-to-use built-in UI and transcriptions, all that is required is a press of a button and a call for help! 
+                        lives. Our smart medical box, hosted in public any
+                        public area is fit with solar-powered technologies that
+                        ensure that help is always accessible anywhere, anytime.
+                        Our goal is to guide anyone through the toughest or
+                        scariest moments using visual guides and step-by-step
+                        instructions by first responders. Through an easy-to-use
+                        built-in UI and transcriptions, all that is required is
+                        a press of a button and a call for help!
                     </div>
                     <Link to="/info" className="section-one-button">
                         <div>Learn More</div>
@@ -49,8 +53,13 @@ function IndexPage() {
                             Addressable LEDs + Alarm
                         </div>
                         <div className="section-two-statement-text">
-                            The box is equipped with 8 different indicator lights for a variety of medical nessecities for our responders to quickly guide to users through the proccess of first-aid.
-                            As a result, we are able to close the barrier between first-responders and people who require help through an interactive proccess.
+                            The box is equipped with 8 different indicator
+                            lights for a variety of medical nessecities for our
+                            responders to quickly guide to users through the
+                            proccess of first-aid. As a result, we are able to
+                            close the barrier between first-responders and
+                            people who require help through an interactive
+                            proccess.
                         </div>
                     </div>
                     <div className="section-two-statement">
@@ -58,7 +67,11 @@ function IndexPage() {
                             Solar power
                         </div>
                         <div className="section-two-statement-text">
-                            To ensure that the lifepod can be intergrated in all areas around cities and even the most remote areas, we have equipped our boxes with a solar panel and the batteries required to sustain day and night usage.
+                            To ensure that the lifepod can be intergrated in all
+                            areas around cities and even the most remote areas,
+                            we have equipped our boxes with a solar panel and
+                            the batteries required to sustain day and night
+                            usage.
                         </div>
                     </div>
                     <div className="section-two-statement">
@@ -66,7 +79,12 @@ function IndexPage() {
                             Cellular Data
                         </div>
                         <div className="section-two-statement-text">
-                            To further boost the versatillity of locations that the box can be integrated, we use cellular data to ensure that the interface and IoT communications can be as seemless and reliable as possible while still providing the range required for any scale of operation anywhere.
+                            To further boost the versatillity of locations that
+                            the box can be integrated, we use cellular data to
+                            ensure that the interface and IoT communications can
+                            be as seemless and reliable as possible while still
+                            providing the range required for any scale of
+                            operation anywhere.
                         </div>
                     </div>
                 </div>

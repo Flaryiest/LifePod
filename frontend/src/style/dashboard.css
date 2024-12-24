@@ -52,7 +52,7 @@
     background-color: var(--secondary-background-color);
     padding: 1rem;
     border-radius: 6px;
-    box-shadow: 2px 2px 8px rgba(93, 240, 35, 0.2);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-right-column {

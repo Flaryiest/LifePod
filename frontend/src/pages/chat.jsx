@@ -57,7 +57,11 @@ const ChatRoom = () => {
                     }
                 )
 
-                if (response.ok && ws.current && ws.current.readyState === WebSocket.OPEN) {
+                if (
+                    response.ok &&
+                    ws.current &&
+                    ws.current.readyState === WebSocket.OPEN
+                ) {
                     ws.current.send(JSON.stringify(newMessage))
                 }
             } catch (err) {
@@ -71,7 +75,8 @@ const ChatRoom = () => {
             <div className="message-container">
                 {messages.map((msg, index) => (
                     <div key={index} className="message">
-                        <span>{msg.time}</span> - <b>{msg.sender}:</b> {msg.message}
+                        <span>{msg.time}</span> - <b>{msg.sender}:</b>{' '}
+                        {msg.message}
                     </div>
                 ))}
             </div>
