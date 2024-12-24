@@ -1,30 +1,36 @@
 import { useState, useEffect } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
-import ws from 'ws'
+
 const ChatRoom = () => {
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const params = useParams()
     const chatid = params.chatid
+
     useEffect(() => {
-        ws.current = new WebSocket('wss://lifepod-server.up.railway.app')
-        ws.current.onopen = () => {
-            console.log('websocket opened')
+        const ws = new WebSocket('wss://lifepod-server.up.railway.app')
+
+        ws.onopen = () => {
+            console.log('WebSocket opened')
         }
-        ws.current.onmessage = async (event) => {
+
+        ws.onmessage = async (event) => {
             const data = await event.data.text()
             const receivedMessage = JSON.parse(data)
             setMessages((prevMessages) => [...prevMessages, receivedMessage])
         }
-        ws.current.onclose = () => {
-            console.log('websocket closed')
+
+        ws.onclose = () => {
+            console.log('WebSocket closed')
         }
-        ws.current.onerror = (error) => {
-            console.log(error)
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error)
         }
+
         return () => {
-            ws.current.close()
+            ws.close()
         }
     }, [])
 
@@ -32,12 +38,13 @@ const ChatRoom = () => {
         if (messageInput.trim()) {
             const newMessage = {
                 message: messageInput,
+                sender: 'user',
                 time: new Date().toLocaleTimeString(),
             }
-            const message = messageInput
+
             setMessageInput('')
+
             try {
-                console.log('pog')
                 const response = await fetch(
                     'https://lifepod-production.up.railway.app/api/send/message',
                     {
@@ -45,7 +52,7 @@ const ChatRoom = () => {
                         body: JSON.stringify({
                             chatid: chatid,
                             sender: 'user',
-                            message: message,
+                            message: messageInput,
                         }),
                         credentials: 'include',
                         headers: {
@@ -54,8 +61,9 @@ const ChatRoom = () => {
                     }
                 )
 
-                if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-                    ws.current.send(JSON.stringify(newMessage))
+                if (response.ok && ws.readyState === WebSocket.OPEN) {
+                    console.log(newMessage)
+                    ws.send(JSON.stringify(newMessage))
                 }
             } catch (err) {
                 console.error('Error sending message:', err)
@@ -68,7 +76,7 @@ const ChatRoom = () => {
             <div className="message-container">
                 {messages.map((msg, index) => (
                     <div key={index} className="message">
-                        <span>{msg.time}</span>: {msg.message}
+                        <strong>{msg.sender}</strong>: <span>{msg.time}</span> - {msg.message}
                     </div>
                 ))}
             </div>
@@ -89,11 +97,10 @@ const ChatRoom = () => {
 const ToggleDashboard = () => {
     const [userInfo, setUserInfo, render, rerender] = useOutletContext()
     const [toggleItems, setToggleItems] = useState(() => {
-        // Convert string values to booleans for initialization
         return Object.fromEntries(
             Object.entries(userInfo.item_information).map(([key, value]) => [
                 key,
-                value === 'true', // Convert "true"/"false" strings to booleans
+                value === 'true',
             ])
         )
     })
@@ -102,7 +109,7 @@ const ToggleDashboard = () => {
         setToggleItems((prevState) => {
             const updatedState = {
                 ...prevState,
-                [itemName]: !prevState[itemName], // Toggle the boolean value
+                [itemName]: !prevState[itemName],
             }
             return updatedState
         })
@@ -113,7 +120,6 @@ const ToggleDashboard = () => {
                 [itemName]: !toggleItems[itemName],
             }
 
-            // Convert booleans back to "true"/"false" strings for the API
             const convertedState = Object.fromEntries(
                 Object.entries(updatedState).map(([key, value]) => [
                     key,
