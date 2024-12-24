@@ -120,8 +120,8 @@
 
       ws.onmessage = async (event) => {
         try {
-          const stringData = await event.data.text;
-          console.log(stringData, event.data.text)
+          const stringData = await event.data.text();
+          console.log(stringData, event.data.text())
           const data = await JSON.parse(stringData)
           console.log('WebSocket received:', data);
           if (Array.isArray(data)) {
