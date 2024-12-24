@@ -39,7 +39,7 @@
 }
 
 .dashboard-left-column {
-    background-color: var(--card-background-color);
+    background-color: var(--secondary-background-color);
     padding: 1rem;
     border-radius: 6px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -206,6 +206,9 @@ h2 {
     background-color: var(--secondary-background-color);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-5px);
+}
+.dashboard-card:hover {
+    background-color: white;
 }
 
 .dashboard-card:hover,
