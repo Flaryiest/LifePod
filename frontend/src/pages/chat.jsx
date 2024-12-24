@@ -113,7 +113,7 @@ const ToggleDashboard = () => {
             )
 
             const response = await fetch(
-                'http://localhost:3000/api/update/box/contents',
+                'https://lifepod-production.up.railway.app/api/update/box/contents',
                 {
                     method: 'POST',
                     body: JSON.stringify({

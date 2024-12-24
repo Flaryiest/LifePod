@@ -7,10 +7,13 @@ export default function DashboardLayout() {
     const [render, triggerRender] = useState(0)
     useEffect(() => {
         async function getInfo() {
-            const response = await fetch('https://lifepod-production.up.railway.app/api/user', {
-                method: 'POST',
-                credentials: 'include',
-            })
+            const response = await fetch(
+                'https://lifepod-production.up.railway.app/api/user',
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                }
+            )
             const userInfo = await response.json()
             console.log(userInfo)
             setUserInfo(userInfo)
