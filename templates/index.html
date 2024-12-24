@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifePod</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #850000;
+    }
+    .message {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+    .timestamp {
+      font-size: 0.8em;
+      color: #888;
+    }
+    .sender {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .message-text {
+      display: inline;
+    }
+    #message-container-wrapper {
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Emergency help</h1>
+  <button id="startBtn">Call for Operator</button>
+  <p id="output">Press the button and start speaking...</p>
+
+  <div id="message-container-wrapper">
+    <div id="message-container"></div>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const output = document.getElementById('output');
+    const messageContainer = document.getElementById('message-container');
+    const messageContainerWrapper = document.getElementById('message-container-wrapper');
+
+    let messages = [];
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    }
+
+    function renderMessages(messages) {
+      messageContainer.innerHTML = '';
+
+      messages.forEach(msg => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+
+        messageElement.innerHTML = `
+          <span class="timestamp">${formatDate(msg.messageDate)}</span>
+          <span class="sender">${msg.sender}:</span>
+          <span class="message-text">${msg.message}</span>
+        `;
+        messageContainer.appendChild(messageElement);
+      });
+
+      messageContainerWrapper.scrollTop = messageContainerWrapper.scrollHeight;
+    }
+
+    function fetchMessages() {
+      fetch('https://lifepod-production.up.railway.app/api/get/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ chatid: 1 })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error fetching messages');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Received messages:', data);
+        if (Array.isArray(data)) {
+          renderMessages(data);
+        } else {
+          throw new Error('Invalid data format');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        messageContainer.textContent = 'Error fetching messages';
+      });
+    }
+
+
+    setInterval(fetchMessages, 1000);
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      output.textContent = "Your browser does not support Speech Recognition. Please try Google Chrome.";
+      startBtn.disabled = true;
+    } else {
+      const recognition = new SpeechRecognition();
+
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        output.textContent = "Listening... please speak.";
+      };
+
+      recognition.onresult = async (event) => {
+        const transcript = event.results[0][0].transcript;
+        output.textContent = `You said: "${transcript}"`;
+
+        try {
+          const response = await fetch('http://10.0.0.250:3333/transcript', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: transcript })
+          });
+
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error('Error posting transcript:', error);
+        }
+      };
+
+      recognition.onerror = (event) => {
+        output.textContent = `Error occurred: ${event.error}`;
+      };
+
+      recognition.onend = () => {
+        output.textContent += " (Recognition ended)";
+        recognition.start();
+      };
+
+      startBtn.addEventListener('click', () => {
+        recognition.start();
+      });
+    }
+  </script>
+</body>
+</html>
