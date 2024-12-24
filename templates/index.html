@@ -97,20 +97,19 @@
     }
 
     function renderMessages(messages) {
-      messageContainer.innerHTML = '';
-      messages.forEach(msg => {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.innerHTML = `
-          <span class="timestamp">${formatDate(msg.messagedate)}</span>
-          <span class="sender">${msg.sender}:</span>
-          <span class="message-text">${msg.message}</span>
-        `;
-        messageContainer.appendChild(messageElement);
-      });
-      messageContainerWrapper.scrollTop = messageContainerWrapper.scrollHeight;
-    }
-
+  messageContainer.innerHTML = '';
+  messages.forEach(msg => {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+    messageElement.innerHTML = `
+      <span class="timestamp">${msg.time}</span>  <!-- Using 'time' instead of date -->
+      <span class="sender">${msg.sender}:</span>
+      <span class="message-text">${msg.message}</span>
+    `;
+    messageContainer.appendChild(messageElement);
+  });
+  messageContainerWrapper.scrollTop = messageContainerWrapper.scrollHeight;
+}
     function connectWebSocket() {
       ws = new WebSocket('wss://lifepod-server.up.railway.app');
 
@@ -162,26 +161,36 @@
       };
 
       recognition.onresult = async (event) => {
-        const transcript = event.results[0][0].transcript;
-        const payload = {
-          chatid: 1,
-          message: transcript,
-          sender: "LifePod"
-        };
-        try {
-          const response = await fetch('https://lifepod-production.up.railway.app/api/send/message', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (ws && ws.readyState === WebSocket.OPEN) {
-            console.log(payload)
-            ws.send(JSON.stringify(payload));
-          }
-        } catch (error) {
-          console.error('Error posting transcript:', error);
-        }
-      };
+  const transcript = event.results[0][0].transcript;
+
+    const now = new Date();
+    const time = now.toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+
+    const payload = {
+      time: time,
+      message: transcript,
+      sender: "LifePod"
+    };
+
+    try {
+      const response = await fetch('https://lifepod-production.up.railway.app/api/send/message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        console.log(payload);
+        ws.send(JSON.stringify(payload));
+      }
+    } catch (error) {
+      console.error('Error posting transcript:', error);
+    }
+  };
 
       recognition.onerror = (event) => {
         output.textContent = `Error occurred: ${event.error}`;
