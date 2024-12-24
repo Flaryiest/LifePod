@@ -34,12 +34,22 @@ const ChatRoom = () => {
 
     const handleSendMessage = async () => {
         if (messageInput.trim()) {
+            const now = new Date();
+            const time = now.toLocaleString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+            }).replace('a.m.', 'AM').replace('p.m.', 'PM');
+            
             const newMessage = {
                 message: messageInput,
                 sender: 'Helper',
-                time: new Date().toLocaleTimeString(),
+                time: time,
             }
+            
             setMessageInput('')
+            
             try {
                 const response = await fetch(
                     'https://lifepod-production.up.railway.app/api/send/message',
@@ -56,7 +66,7 @@ const ChatRoom = () => {
                         },
                     }
                 )
-
+    
                 if (
                     response.ok &&
                     ws.current &&
