@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import '../style/chat.css'
 
