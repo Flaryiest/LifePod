@@ -21,11 +21,10 @@ function IndexPage() {
                     </Fade>
                     <div className="section-one-text">
                         Introducing a cutting-edge device designed to save
-                        lives. Our smart medical box, accessible to the public,
-                        connects to your phone, enabling real-time assistance in
-                        emergencies. With built-in sensors for tracking vitals
-                        and providing quick diagnoses, it empowers individuals
-                        to act swiftly in critical situations.
+                        lives. Our smart medical box, hosted in public any public area is fit with solar-powered technologies that ensure that help is always accessible anywhere, anytime.
+                        
+                        Our goal is to guide anyone through the toughest or scariest moments using visual guides and step-by-step instructions by first responders. 
+                        Through an easy-to-use built-in UI and transcriptions, all that is required is a press of a button and a call for help! 
                     </div>
                     <Link to="/info" className="section-one-button">
                         <div>Learn More</div>
@@ -33,7 +32,7 @@ function IndexPage() {
                     <div className="glow-one"></div>
                     <img
                         className="section-one-image"
-                        src="/assets/first-aid.jpg"
+                        src="/assets/front.jpg"
                         alt="Smart Medical Box"
                     />
                     <div className="glow-two"></div>
@@ -47,36 +46,27 @@ function IndexPage() {
                     </Fade>
                     <div className="section-two-statement">
                         <div className="section-two-statement-header">
-                            Vital Tracking
+                            Addressable LEDs + Alarm
                         </div>
                         <div className="section-two-statement-text">
-                            The box is equipped with advanced sensors that
-                            monitor key vitals such as heart rate, oxygen
-                            levels, and temperature. It provides an immediate,
-                            AI-driven diagnosis to guide you on the next steps.
+                            The box is equipped with 8 different indicator lights for a variety of medical nessecities for our responders to quickly guide to users through the proccess of first-aid.
+                            As a result, we are able to close the barrier between first-responders and people who require help through an interactive proccess.
                         </div>
                     </div>
                     <div className="section-two-statement">
                         <div className="section-two-statement-header">
-                            Real-Time Support
+                            Solar power
                         </div>
                         <div className="section-two-statement-text">
-                            By connecting to your phone, the box creates a
-                            direct text channel with first responders. They can
-                            coach you or a helper through managing the
-                            situation, providing step-by-step instructions on
-                            wound care, CPR, or other essential actions.
+                            To ensure that the lifepod can be intergrated in all areas around cities and even the most remote areas, we have equipped our boxes with a solar panel and the batteries required to sustain day and night usage.
                         </div>
                     </div>
                     <div className="section-two-statement">
                         <div className="section-two-statement-header">
-                            Accessible Design
+                            Cellular Data
                         </div>
                         <div className="section-two-statement-text">
-                            Designed to be user-friendly, the box is available
-                            for public use in various locations. Whether you’re
-                            at home or in a public space, you can access
-                            life-saving technology when it matters most.
+                            To further boost the versatillity of locations that the box can be integrated, we use cellular data to ensure that the interface and IoT communications can be as seemless and reliable as possible while still providing the range required for any scale of operation anywhere.
                         </div>
                     </div>
                 </div>
@@ -86,7 +76,7 @@ function IndexPage() {
                     <div className="section-three-left">
                         <img
                             className="section-three-image"
-                            src="/assets/first-aid-rough.jpg"
+                            src="/assets/back.jpg"
                             alt="Emergency Assistance"
                         />
                     </div>
