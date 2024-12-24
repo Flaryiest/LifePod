@@ -42,12 +42,12 @@ export default class ApiController {
                             }
                             else {
                                 res.status(200).cookie("jwt", token, {
-                                    sameSite: 'none',
+                                    sameSite: "none",
                                     secure: true,
                                     path: '/',
                                     httpOnly: true,
                                     expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
-                                    partitioned: false
+                                    partitioned: true
                                 }).send("cookie");
                             }
                         });
