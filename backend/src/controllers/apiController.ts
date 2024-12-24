@@ -58,7 +58,7 @@ export default class ApiController {
                                 secure: true, 
                                 path: '/',
                                 httpOnly: true,
-                                expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
+                                expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
                                 partitioned: true
                             }).send("cookie")
                         }
