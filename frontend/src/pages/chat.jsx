@@ -1,36 +1,30 @@
-import { useState, useEffect } from 'react'
-import { useOutletContext, useParams } from 'react-router-dom'
-import '../style/chat.css'
-
 const ChatRoom = () => {
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const params = useParams()
     const chatid = params.chatid
+    const ws = useRef(null)
 
     useEffect(() => {
-        const ws = new WebSocket('wss://lifepod-server.up.railway.app')
-
-        ws.onopen = () => {
-            console.log('WebSocket opened')
+        ws.current = new WebSocket('wss://lifepod-server.up.railway.app')
+        ws.current.onopen = () => {
+            console.log('websocket opened')
         }
-
-        ws.onmessage = async (event) => {
+        ws.current.onmessage = async (event) => {
             const data = await event.data.text()
             const receivedMessage = JSON.parse(data)
             setMessages((prevMessages) => [...prevMessages, receivedMessage])
         }
-
-        ws.onclose = () => {
-            console.log('WebSocket closed')
+        ws.current.onclose = () => {
+            console.log('websocket closed')
         }
-
-        ws.onerror = (error) => {
-            console.error('WebSocket error:', error)
+        ws.current.onerror = (error) => {
+            console.log(error)
         }
-
         return () => {
-            ws.close()
+            if (ws.current) {
+                ws.current.close()
+            }
         }
     }, [])
 
@@ -38,12 +32,10 @@ const ChatRoom = () => {
         if (messageInput.trim()) {
             const newMessage = {
                 message: messageInput,
-                sender: 'user',
+                sender: 'helper',
                 time: new Date().toLocaleTimeString(),
             }
-
             setMessageInput('')
-
             try {
                 const response = await fetch(
                     'https://lifepod-production.up.railway.app/api/send/message',
@@ -61,9 +53,8 @@ const ChatRoom = () => {
                     }
                 )
 
-                if (response.ok && ws.readyState === WebSocket.OPEN) {
-                    console.log(newMessage)
-                    ws.send(JSON.stringify(newMessage))
+                if (response.ok && ws.current && ws.current.readyState === WebSocket.OPEN) {
+                    ws.current.send(JSON.stringify(newMessage))
                 }
             } catch (err) {
                 console.error('Error sending message:', err)
@@ -76,7 +67,7 @@ const ChatRoom = () => {
             <div className="message-container">
                 {messages.map((msg, index) => (
                     <div key={index} className="message">
-                        <strong>{msg.sender}</strong>: <span>{msg.time}</span> - {msg.message}
+                        <span>{msg.time}</span> - <b>{msg.sender}:</b> {msg.message}
                     </div>
                 ))}
             </div>
