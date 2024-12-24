@@ -89,7 +89,7 @@ function IndexPage() {
                             emergencies and professional medical care. It
                             empowers individuals and communities to act
                             confidently in critical moments, knowing expert help
-                            is just a text away.
+                            is just a tap away.
                         </div>
                     </div>
                 </div>
@@ -109,9 +109,9 @@ function IndexPage() {
                             community, contact us at{' '}
                             <a
                                 className="aqua bold"
-                                href="mailto: support@smartmedicalbox.org"
+                                href="mailto: support@lifepod.org"
                             >
-                                support@smartmedicalbox.org
+                                support@lifepod.org
                             </a>
                             . Together, we can make a difference.
                         </div>
