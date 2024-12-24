@@ -54,7 +54,7 @@ export default class ApiController {
                         }
                         else {
                             res.status(200).cookie("jwt", token, {
-                                sameSite:'none',
+                                sameSite: "none",
                                 secure: true, 
                                 path: '/',
                                 httpOnly: true,

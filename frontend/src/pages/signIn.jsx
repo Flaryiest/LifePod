@@ -28,7 +28,8 @@ function LoginPage() {
                 }),
             }
         )
-        console.log(response, 'response')
+        console.log('Response:', response);
+        console.log('Set-Cookie Header:', response.headers.get('set-cookie'));
         if (response.status == 400) {
             setError('Sign up failed. Please check your details and try again.')
         } else if (response.status == 200) {
