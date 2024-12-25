@@ -1,6 +1,8 @@
 # LifePod
 Project submission for MiniMedi 2024
-
+https://devpost.com/software/lifepod
+https://lifepod.pages.dev/
+https://lifepod-hardware.pages.dev/
 ## Inspiration
 
 As mentioned in our video, the inspiration behind this project was very personal. We had firsthand experience with the issues underlying first aid kits and the first responder system, as one of our teammates almost died due to the issues, after being mauled by a bear.
