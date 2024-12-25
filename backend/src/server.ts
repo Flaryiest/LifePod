@@ -6,7 +6,6 @@ wss.on("connection", (ws) => {
 
     console.log("New connection formed.");
     ws.on("message", (message) => {
-        console.log(message)
         console.log("New message received:", message.toString());
 
         wss.clients.forEach((client) => {

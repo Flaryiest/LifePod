@@ -24,11 +24,9 @@ class Database {
     async getInfo(user: any) {
         try {
             const { rows } = await pool.query("SELECT * FROM users LEFT JOIN boxes ON users.id = boxes.connected_userid LEFT JOIN box_contents ON boxes.id = box_contents.boxid ")
-            console.log(rows)
             rows.filter((row) => {
                 return row.id = user.id
             })
-            console.log(rows, "filtered")
             return rows[0]
         } catch(err) {
             console.log(err)
@@ -67,7 +65,6 @@ class Database {
     async updateBoxContents(boxid: number, boxContents: object) {
         try {
             const status = await pool.query("UPDATE box_contents SET item_information = ($2) WHERE ($1) = box_contents.boxid", [boxid, boxContents])
-            console.log("test", status)
             if (status) {
                 return true
             }

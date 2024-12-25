@@ -45,9 +45,7 @@ export default class ApiController {
                     res.status(400).send()
                 }
                 else {
-                    console.log("pog")
                     jwt.sign({userInfo}, process.env.JWT_SECRET, {expiresIn: "10000s"}, (err: any, token: any) => {
-                        console.log(userInfo)
                         if (err) {
                             console.log(err)
                             res.status(400).send()
@@ -80,7 +78,6 @@ export default class ApiController {
                     res.status(400).send()
                 }
                 else {
-                    console.log(decoded.userInfo, "decoded")
                     req.user = decoded.userInfo
                     
                 }
@@ -89,7 +86,6 @@ export default class ApiController {
         }
     }
     getUserInfo = async (req: CustomRequest, res: Response) => {
-        console.log(req.user, "user")
         if (req.user) {
             const userInfo = await db.getInfo(req.user)
             res.json(userInfo).status(200).send()
@@ -110,7 +106,6 @@ export default class ApiController {
     }
 
     sendMessage = async (req: Request, res: Response) => {
-        console.log(req.body.message, req.body.chatid, req.body.sender)
         const status = await db.sendMessage(req.body.chatid, req.body.message, req.body.sender)
         if (status) {
             res.status(200).send()
@@ -122,9 +117,7 @@ export default class ApiController {
     }
 
     updateBoxContents = async(req: Request, res: Response) => {
-        console.log(req.body.boxid, req.body.boxContents)
         const status = await db.updateBoxContents(req.body.boxid, req.body.boxContents)
-        console.log(status)
         if (status) {
             res.status(200).send()
         }
@@ -134,7 +127,6 @@ export default class ApiController {
     }
 
     getMessages = async (req: Request, res: Response) => {
-        console.log(req.body.chatid)
         const messages = await db.getMessages(req.body.chatid)
         if (messages) {
             res.json(messages).status(200).send()
@@ -145,7 +137,6 @@ export default class ApiController {
     }
 
     getBoxContents = async (req: Request, res:Response) => {
-        console.log(req.body.boxid)
         const boxContents = await db.getBoxContents(req.body.boxid)
         if (boxContents) {
             res.json(boxContents.item_information).status(200).send()
